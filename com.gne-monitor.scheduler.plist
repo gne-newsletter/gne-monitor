@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.gne-monitor.scheduler</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/python3</string>
+    <string>/Users/hyoungsukkwon/gne-monitor/run_scheduler.py</string>
+    <string>start</string>
+    <string>--no-email</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/hyoungsukkwon/gne-monitor</string>
+
+  <!-- 로그인 시 자동 시작 -->
+  <key>RunAtLoad</key>
+  <true/>
+
+  <!-- 비정상 종료 시 재시작 -->
+  <key>KeepAlive</key>
+  <dict>
+    <key>Crashed</key>
+    <true/>
+  </dict>
+
+  <key>StandardOutPath</key>
+  <string>/Users/hyoungsukkwon/gne-monitor/logs/gne_monitor.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/hyoungsukkwon/gne-monitor/logs/scheduler_error.log</string>
+
+  <!-- 환경변수 (필요 시 SMTP 비밀번호 추가) -->
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PYTHONUNBUFFERED</key>
+    <string>1</string>
+  </dict>
+</dict>
+</plist>

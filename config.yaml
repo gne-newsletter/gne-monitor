@@ -1,0 +1,286 @@
+app:
+  name: GNE 근병증 모니터링 시스템
+  version: "0.1.0"
+  language: ko
+  timezone: Asia/Seoul
+
+database:
+  type: sqlite
+  path: data/gne_monitor.db
+  backup:
+    enabled: true
+    interval_days: 7
+    retention_days: 90
+    path: data/backups/
+
+assessment:
+  schedule:
+    default_interval_weeks: 12  # 3개월 간격 정기 평가
+    reminder_days_before: 7
+
+  muscle_strength:
+    # MRC (Medical Research Council) 척도 기반 근력 평가
+    scale: MRC  # 0–5
+    groups:
+      - name: 발등굽힘근 (Tibialis Anterior)
+        side: [left, right]
+        weight: 1.5  # 진행 지표 가중치
+      - name: 발바닥굽힘근 (Gastrocnemius)
+        side: [left, right]
+        weight: 1.2
+      - name: 발가락폄근 (Extensor Digitorum)
+        side: [left, right]
+        weight: 1.0
+      - name: 넙다리네갈래근 (Quadriceps)
+        side: [left, right]
+        weight: 1.3
+      - name: 넙다리두갈래근 (Hamstrings)
+        side: [left, right]
+        weight: 1.0
+      - name: 어깨세모근 (Deltoid)
+        side: [left, right]
+        weight: 0.8
+      - name: 위팔두갈래근 (Biceps)
+        side: [left, right]
+        weight: 0.8
+      - name: 손목굽힘근 (Wrist Flexors)
+        side: [left, right]
+        weight: 0.6
+
+  functional_tests:
+    - name: 10m 보행 속도 (10-Meter Walk Test)
+      unit: seconds
+      alert_threshold_change_pct: 20
+    - name: 6분 보행 거리 (6-Minute Walk Test)
+      unit: meters
+      alert_threshold_change_pct: 15
+    - name: 계단 오르기 (Stair Climb Test)
+      unit: seconds
+      alert_threshold_change_pct: 25
+    - name: 의자에서 일어서기 (5x Sit-to-Stand)
+      unit: seconds
+      alert_threshold_change_pct: 20
+
+  patient_reported_outcomes:
+    - name: GNEM-QoL  # GNE Myopathy Quality of Life
+      items: 35
+    - name: PROMIS-fatigue
+      items: 8
+    - name: 통증 NRS (Numeric Rating Scale)
+      range: [0, 10]
+
+biomarkers:
+  lab_tests:
+    - name: 크레아틴키나아제 (CK)
+      unit: U/L
+      normal_range: [26, 308]
+      alert_threshold: 1000
+    - name: 알돌라아제 (Aldolase)
+      unit: U/L
+      normal_range: [1.0, 7.5]
+    - name: 젖산탈수소효소 (LDH)
+      unit: U/L
+      normal_range: [135, 225]
+    - name: 아스파르테이트아미노전달효소 (AST)
+      unit: U/L
+      normal_range: [10, 40]
+    - name: 알라닌아미노전달효소 (ALT)
+      unit: U/L
+      normal_range: [7, 56]
+  imaging:
+    modalities: [MRI, ultrasound]
+    preferred: MRI
+    interval_months: 12
+
+disease_progression:
+  staging:
+    - stage: 1
+      label: 경증 (Mild)
+      description: 독립 보행 가능, 경미한 발목 약화
+    - stage: 2
+      label: 중등도 (Moderate)
+      description: 발목-발 보조기(AFO) 필요, 상지 경미한 약화
+    - stage: 3
+      label: 중증 (Severe)
+      description: 휠체어 보조 필요, 상지 현저한 약화
+    - stage: 4
+      label: 최중증 (Very Severe)
+      description: 전동 휠체어 의존, 일상생활 전반 보조 필요
+
+  progression_alerts:
+    mrc_drop_threshold: 1       # 단일 근육군 MRC 1점 이상 감소 시 알림
+    walk_speed_drop_pct: 15     # 10m 보행 속도 15% 이상 저하 시 알림
+    ck_spike_multiplier: 3.0    # 기준치 대비 3배 이상 상승 시 알림
+
+notifications:
+  email:
+    enabled: true
+    smtp_host: smtp.gmail.com
+    smtp_port: 587
+    from: twosun72@gmail.com
+    recipients:
+      - twosun72@gmail.com
+    events:
+      - progression_alert
+      - assessment_reminder
+      - lab_abnormal
+
+  summary_report:
+    enabled: true
+    frequency: monthly
+    format: pdf
+
+export:
+  formats: [csv, json, pdf]
+  include_charts: true
+  output_dir: exports/
+
+news:
+  user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) GNE-Monitor/0.1"
+  rate_limit_delay: 1.0
+  fetch:
+    retries: 3
+    retry_delay: 5
+    timeout: 20
+
+  feeds:
+    - label: google_news_en
+      url: "https://news.google.com/rss/search?q=GNE+myopathy&hl=en&gl=US&ceid=US:en"
+      language: en
+
+    - label: google_news_ko
+      url: "https://news.google.com/rss/search?q=GNE+%EA%B7%BC%EB%B3%91%EC%A6%9D&hl=ko&gl=KR&ceid=KR:ko"
+      language: ko
+
+    - label: google_news_hibm
+      url: "https://news.google.com/rss/search?q=HIBM+hereditary+inclusion+body+myopathy&hl=en&gl=US&ceid=US:en"
+      language: en
+
+    - label: google_news_ultragenyx
+      url: "https://news.google.com/rss/search?q=Ultragenyx+UX016+GNEM&hl=en&gl=US&ceid=US:en"
+      language: en
+
+  storage:
+    table: news_articles
+    incremental: true
+    max_age_days: 365  # 1년 초과 기사는 저장 제외
+
+scheduler:
+  pid_file: .scheduler.pid
+  state_file: data/scheduler_state.json
+
+  jobs:
+    pubmed_collect:
+      enabled: true
+      every: week
+      day: monday
+      time: "02:00"
+
+    ct_collect:
+      enabled: true
+      every: week
+      day: monday
+      time: "02:30"
+
+    news_collect:
+      enabled: true
+      every: day
+      time: "06:00"   # 매일 아침 뉴스 수집
+
+    analysis:
+      enabled: true
+      every: week
+      day: monday
+      time: "03:00"
+
+    monthly_report:
+      enabled: true
+      every: month   # 매월 1일
+      time: "08:00"
+
+  notify_on:
+    new_pubmed_articles: true    # 신규 논문 발견 시 이메일
+    new_ct_trials: true          # 신규 임상시험 발견 시 이메일
+    job_failure: true            # 잡 실패 시 이메일
+    monthly_report: true         # 월간 리포트 이메일
+
+clinicaltrials:
+  base_url: https://clinicaltrials.gov/api/v2/studies
+  rate_limit_delay: 0.5  # seconds between requests
+  fetch:
+    page_size: 100        # max 1000 per NCBI docs
+    retries: 3
+    retry_delay: 5
+
+  queries:
+    - label: gne_myopathy
+      cond: "GNE myopathy OR HIBM OR Nonaka myopathy OR \"distal myopathy with rimmed vacuoles\""
+      max_results: 500
+
+    - label: gne_sialic_acid
+      term: "GNE myopathy sialic acid OR ManNAc OR N-acetylmannosamine"
+      max_results: 200
+
+  storage:
+    table: clinical_trials
+    incremental: true
+
+pubmed:
+  api_key: ""  # NCBI API key (선택, 있으면 10 req/s, 없으면 3 req/s)
+  email: twosun72@gmail.com  # NCBI 정책상 필수
+  base_url: https://eutils.ncbi.nlm.nih.gov/entrez/eutils
+  rate_limit_delay: 0.34  # seconds between requests (no key: 3/s)
+
+  queries:
+    - label: gne_myopathy_core
+      term: >
+        ("GNE myopathy"[Title/Abstract] OR
+         "GNE-myopathy"[Title/Abstract] OR
+         "Nonaka myopathy"[Title/Abstract] OR
+         "hereditary inclusion body myopathy"[Title/Abstract] OR
+         "HIBM"[Title/Abstract] OR
+         "distal myopathy with rimmed vacuoles"[Title/Abstract] OR
+         "DMRV"[Title/Abstract])
+      max_results: 2000
+
+    - label: gne_gene_variants
+      term: >
+        ("GNE gene"[Title/Abstract] OR "GNE mutation"[Title/Abstract] OR
+         "UDP-GlcNAc 2-epimerase"[Title/Abstract] OR
+         "ManNAc kinase"[Title/Abstract])
+        AND myopathy[Title/Abstract]
+      max_results: 500
+
+    - label: gne_treatment
+      term: >
+        ("GNE myopathy"[Title/Abstract] OR "HIBM"[Title/Abstract])
+        AND (treatment[Title/Abstract] OR therapy[Title/Abstract] OR
+             "sialic acid"[Title/Abstract] OR "ManNAc"[Title/Abstract] OR
+             "gene therapy"[Title/Abstract] OR clinical[Title/Abstract])
+      max_results: 300
+
+  fetch:
+    batch_size: 100           # efetch 한 번에 가져올 PMID 수
+    retries: 3
+    retry_delay: 5            # seconds
+    fields:
+      - pmid
+      - title
+      - abstract
+      - authors
+      - journal
+      - pub_date
+      - doi
+      - mesh_terms
+      - publication_types
+      - keywords
+
+  storage:
+    table: pubmed_articles
+    incremental: true         # 마지막 수집 이후 신규 논문만 추가
+
+logging:
+  level: INFO
+  file: logs/gne_monitor.log
+  max_size_mb: 10
+  backup_count: 5

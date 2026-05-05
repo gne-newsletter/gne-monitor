@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# 데이터베이스 (로컬 수집 데이터)
+data/
+
+# 로그
+logs/
+
+# 내보낸 리포트
+exports/
+
+# 스케줄러 상태
+.scheduler.pid
+data/scheduler_state.json
+
+# 환경변수 / 시크릿 (절대 커밋 금지)
+.env
+*.env
+
+# macOS
+.DS_Store
