@@ -105,13 +105,25 @@ def job_collect_news(config_path: str, state: dict, notifier) -> dict:
 
 def job_run_analysis(config_path: str, state: dict) -> Optional[Path]:
     """Run full analysis pipeline and return HTML report path."""
-    logger.info("[job] 분석 파이프라인 시작")
-    from analysis import AnalysisPipeline
+    from analysis import AnalysisPipeline, ArticleSummarizer
 
+    # Step 1: AI-summarize any articles that don't have a summary yet.
+    # summarized_at IS NULL ensures already-processed articles are never re-sent to the API.
+    logger.info("[job] AI 요약 시작 (미요약 논문만)")
+    try:
+        with ArticleSummarizer(config_path) as sm:
+            result = sm.run()  # force=False, since_year=None → only summarized_at IS NULL
+        logger.info("[job] AI 요약 완료 — %d건 처리 (%d 성공)", result["processed"], result["success"])
+        state["last_summarize_run"] = datetime.now().isoformat()
+        state["summarized_count"] = state.get("summarized_count", 0) + result["success"]
+    except Exception as e:
+        logger.error("[job] AI 요약 오류 (리포트는 계속 생성): %s", e)
+
+    # Step 2: Generate the full report.
+    logger.info("[job] 분석 파이프라인 시작")
     pipeline = AnalysisPipeline(config_path)
     pipeline.run(export_json=True, export_html=True)
 
-    # Find the most recent HTML report
     cfg = _load_cfg(config_path)
     export_dir = Path(cfg.get("export", {}).get("output_dir", "exports/"))
     htmls = sorted(export_dir.glob("report_*.html"), key=lambda p: p.stat().st_mtime)

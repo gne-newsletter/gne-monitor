@@ -172,7 +172,7 @@ class PublicationTrend:
         from datetime import date
         cutoff = str(date.today().year - years_back)
         rows = self._conn.execute("""
-            SELECT pmid, title, journal, pub_date, authors, doi, summary
+            SELECT pmid, title, journal, pub_date, authors, doi, summary, relevance_score
             FROM pubmed_articles
             WHERE pub_date >= ?
             ORDER BY pub_date DESC

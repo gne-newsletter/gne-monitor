@@ -79,7 +79,7 @@ class Notifier:
         if pubmed_new == 0 and ct_new == 0:
             return
 
-        lines = ["GNE 근병증 모니터링 시스템 — 신규 데이터 알림\n"]
+        lines = ["GNE 근육병 모니터링 시스템 — 신규 데이터 알림\n"]
         if pubmed_new:
             lines.append(f"■ 신규 PubMed 논문: {pubmed_new}건")
             for p in pubmed_details[:5]:
@@ -112,7 +112,7 @@ class Notifier:
         )
         body_html = f"""
         <html><body style="font-family:sans-serif;color:#1e293b">
-        <h2 style="color:#1e40af">GNE 근병증 — 신규 데이터 알림</h2>
+        <h2 style="color:#1e40af">GNE 근육병 — 신규 데이터 알림</h2>
         {"<h3>📄 신규 논문 " + str(pubmed_new) + "건</h3><ul>" + html_items_pm + "</ul>" if pubmed_new else ""}
         {"<h3>🧪 신규 임상시험 " + str(ct_new) + "건</h3><ul>" + html_items_ct + "</ul>" if ct_new else ""}
         <hr><small>GNE 모니터링 시스템 자동 발송</small>
@@ -127,7 +127,7 @@ class Notifier:
             return
         from datetime import date
         month = date.today().strftime("%Y년 %m월")
-        body = f"{month} GNE 근병증 연구 동향 월간 리포트가 첨부되어 있습니다."
+        body = f"{month} GNE 근육병 연구 동향 월간 리포트가 첨부되어 있습니다."
         self._send(f"{month} 월간 리포트", body, attachment=report_html)
 
     def notify_job_failure(self, job_name: str, error: str):

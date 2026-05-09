@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GNE 근병증 주간 뉴스레터</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    /* ==================== */
+    /* 기본 스타일          */
+    /* ==================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #8b5cf6;
+      --primary-dark: #7c3aed;
+      --secondary: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+      --bg-light: #f8fafc;
+      --bg-card: #ffffff;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+      --border: #e2e8f0;
+      --shadow: 0 1px 3px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ==================== */
+    /* 헤더                 */
+    /* ==================== */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .header .meta {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .header .issue-number {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    /* ==================== */
+    /* 레이아웃 컨테이너     */
+    /* ==================== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    /* ==================== */
+    /* 섹션 구분            */
+    /* ==================== */
+    .section {
+      margin-bottom: 2rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-badge {
+      font-size: 0.75rem;
+      background: var(--bg-light);
+      color: var(--text-muted);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    /* ==================== */
+    /* 카드 스타일          */
+    /* ==================== */
+    .card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+    }
+
+    .card-highlight {
+      border-left: 4px solid var(--primary);
+    }
+
+    /* ==================== */
+    /* ⏱️ ZONE 1: 30초 스캔 */
+    /* ==================== */
+    .hero-zone {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--danger);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .relevance-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .star {
+      color: #f59e0b;
+      font-size: 1.2rem;
+    }
+
+    .score {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+    }
+
+    .hero-summary {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    .patient-meaning {
+      background: #ecfdf5;
+      border-left: 4px solid var(--secondary);
+      padding: 1rem;
+      border-radius: 0 8px 8px 0;
+      margin-top: 1rem;
+    }
+
+    .patient-meaning-title {
+      font-weight: 700;
+      color: #065f46;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .patient-meaning-content {
+      color: #065f46;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* ==================== */
+    /* 📋 ZONE 2: 2분 리뷰   */
+    /* ==================== */
+    .quick-scan-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .quick-item {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .quick-item:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .quick-score {
+      display: inline-block;
+      background: var(--secondary);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .quick-title {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .quick-summary {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ==================== */
+    /* 🏥 행동 가이드       */
+    /* ==================== */
+    .action-guide {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .action-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .action-item {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      box-shadow: var(--shadow);
+    }
+
+    .action-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .action-label {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .action-content {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .action-button {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s;
+    }
+
+    .action-button:hover {
+      background: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    /* ==================== */
+    /* 📊 ZONE 3: 깊이 탐색 */
+    /* (접기/펼치기)         */
+    /* ==================== */
+    .collapsible {
+      margin-bottom: 1.5rem;
+    }
+
+    .collapsible-header {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+      transition: all 0.2s;
+    }
+
+    .collapsible-header:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
+    .collapsible-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .collapsible-icon {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      transition: transform 0.3s;
+    }
+
+    .collapsible.open .collapsible-icon {
+      transform: rotate(180deg);
+    }
+
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .collapsible.open .collapsible-content {
+      max-height: 10000px;
+      transition: max-height 0.5s ease-in;
+    }
+
+    .collapsible-body {
+      padding: 1.5rem;
+      background: var(--bg-card);
+      border-radius: 0 0 12px 12px;
+      margin-top: -12px;
+    }
+
+    /* ==================== */
+    /* 테이블 스타일        */
+    /* ==================== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    thead {
+      background: var(--bg-light);
+    }
+
+    th {
+      padding: 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    td {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    tr:hover {
+      background: var(--bg-light);
+    }
+
+    /* ==================== */
+    /* 배지/라벨            */
+    /* ==================== */
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .badge-success {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .badge-warning {
+      background: var(--warning);
+      color: white;
+    }
+
+    .badge-info {
+      background: var(--info);
+      color: white;
+    }
+
+    .badge-score-10 {
+      background: #22c55e;
+      color: white;
+    }
+
+    .badge-score-9 {
+      background: #84cc16;
+      color: white;
+    }
+
+    .badge-score-8 {
+      background: #eab308;
+      color: white;
+    }
+
+    /* ==================== */
+    /* 차트 컨테이너        */
+    /* ==================== */
+    .chart-container {
+      position: relative;
+      height: 300px;
+      margin-top: 1rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ==================== */
+    /* 피드백 섹션          */
+    /* ==================== */
+    .feedback-section {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      margin-top: 2rem;
+    }
+
+    .feedback-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .feedback-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .feedback-btn {
+      background: var(--bg-light);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 1rem;
+    }
+
+    .feedback-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    /* ==================== */
+    /* 푸터                 */
+    /* ==================== */
+    .footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 2rem 1rem;
+      text-align: center;
+      margin-top: 3rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: var(--primary);
+      margin: 0 0.5rem;
+    }
+
+    /* ==================== */
+    /* 모바일 반응형        */
+    /* ==================== */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.4rem;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .hero-zone {
+        padding: 1.5rem;
+      }
+
+      .hero-title {
+        font-size: 1.3rem;
+      }
+
+      .quick-scan-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-container {
+        height: 250px;
+      }
+
+      .feedback-buttons {
+        flex-direction: column;
+      }
+
+      .feedback-btn {
+        width: 100%;
+      }
+
+      table {
+        font-size: 0.8rem;
+      }
+
+      th, td {
+        padding: 0.5rem;
+      }
+
+      /* 모바일에서는 테이블을 카드 형태로 */
+      thead {
+        display: none;
+      }
+
+      tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.75rem;
+      }
+
+      td {
+        display: block;
+        text-align: left;
+        border: none;
+        padding: 0.5rem 0;
+      }
+
+      td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        display: inline-block;
+        width: 100px;
+        color: var(--text-secondary);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ==================== -->
+<!-- 헤더                  -->
+<!-- ==================== -->
+<div class="header">
+  <h1>GNE 근병증 주간 뉴스레터</h1>
+  <div class="meta">2026년 5월 8일 목요일</div>
+  <div class="issue-number">#14</div>
+</div>
+
+<div class="container">
+
+  <!-- ==================== -->
+  <!-- ⏱️ ZONE 1: 30초 스캔  -->
+  <!-- ==================== -->
+  <div class="hero-zone">
+    <div class="hero-badge">🔥 이번 주 가장 중요한 소식</div>
+    <div class="hero-title">
+      GNE 근병증 자가포식 장애 치료 전략 발견
+    </div>
+    <div class="relevance-bar">
+      <span class="star">⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐</span>
+      <span class="score">관련도: 10/10</span>
+    </div>
+    <div class="hero-summary">
+      숙명여대 연구팀이 GNE 근병증 환자의 근육 손상 원인 중 하나인 <strong>자가포식(autophagy) 장애</strong>를 표적으로 하는 새로운 치료 전략을 발견했습니다. 이미 FDA 승인된 약물 <strong>copanlisib</strong>이 효과를 보여, 임상 적용 가능성이 높습니다.
+    </div>
+    <div class="patient-meaning">
+      <div class="patient-meaning-title">
+        💡 환자에게 의미
+      </div>
+      <div class="patient-meaning-content">
+        GNE 근병증의 근본 원인 중 하나를 공략하는 새로운 접근법이며, 이미 FDA 승인된 약물을 사용하기 때문에 임상시험 진입이 빠를 수 있습니다. 기존 ManNAc와 병행하면 더 좋은 효과를 기대할 수 있습니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== -->
+  <!-- 📋 ZONE 2: 2분 리뷰   -->
+  <!-- ==================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">
+        💡 이번 주 주목할 연구 2개
+      </div>
+      <div class="section-badge">관련도 8-9점</div>
+    </div>
+
+    <div class="quick-scan-grid">
+      <!-- 항목 1 -->
+      <div class="quick-item">
+        <div class="quick-score">9점</div>
+        <div class="quick-title">ManNAc 분할 투여로 흡수율 1.7배 증가</div>
+        <div class="quick-summary">
+          ManNAc를 한 번에 4g 복용하는 대신 1g씩 4회 나누어 복용하면 혈중 농도가 1.7배 증가합니다. 총 복용량을 줄이면서도 효과를 높일 수 있어 환자 편의성 개선이 기대됩니다.
+        </div>
+      </div>
+
+      <!-- 항목 2 -->
+      <div class="quick-item">
+        <div class="quick-score">8점</div>
+        <div class="quick-title">유전자 치료 전임상 연구 성공</div>
+        <div class="quick-summary">
+          돌연변이 GNE 유전자를 억제하고 정상 유전자를 공급하는 이중 기능 치료법이 동물 실험에서 성공했습니다. 임상시험 진입 시 근본적 치료 옵션이 될 가능성이 있습니다.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== -->
+  <!-- 🏥 환자 행동 가이드   -->
+  <!-- ==================== -->
+  <div class="action-guide">
+    <div class="action-title">🏥 이번 주 행동 가이드</div>
+
+    <div class="action-item">
+      <div class="action-label">
+        ✅ 지금 지원 가능한 임상시험
+      </div>
+      <div class="action-content">
+        <strong>NCT06664814</strong> - ManNAc Phase 2 (미국, National Human Genome Research Institute)<br>
+        모집 기간: 2026년 5월 10일 ~ 2027년 11월 30일
+      </div>
+      <a href="https://clinicaltrials.gov/study/NCT06664814" target="_blank" class="action-button">
+        자세히 보기 →
+      </a>
+    </div>
+
+    <div class="action-item">
+      <div class="action-label">
+        💡 알아두면 좋은 것
+      </div>
+      <div class="action-content">
+        Ultragenyx의 UX016 유전자 치료제가 2026년 10월 임상시험 시작 예정입니다 (NCT07511556). 국내 진출 가능성에 대해 환우회에서 문의 진행 중입니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== -->
+  <!-- 📊 ZONE 3: 깊이 탐색  -->
+  <!-- (접기/펼치기)          -->
+  <!-- ==================== -->
+
+  <!-- 최근 뉴스 -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">
+      <div class="collapsible-title">
+        📰 최근 30일 뉴스 (19건)
+      </div>
+      <div class="collapsible-icon">▼</div>
+    </div>
+    <div class="collapsible-content">
+      <div class="collapsible-body">
+        <table>
+          <thead>
+            <tr>
+              <th>날짜</th>
+              <th>출처</th>
+              <th>제목</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="날짜">2026-04-23</td>
+              <td data-label="출처">🇰🇷 뉴데일리</td>
+              <td data-label="제목">
+                <a href="#" target="_blank">숙명여대 김주미 교수팀, 희귀 근육질환 'GNE 근병증' 발병 원인 밝혀</a>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="날짜">2026-04-22</td>
+              <td data-label="출처">🇰🇷 중앙일보</td>
+              <td data-label="제목">
+                <a href="#" target="_blank">숙명여대, GNE 근병증 병리 기전 규명</a>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="날짜">2026-04-10</td>
+              <td data-label="출처">🇺🇸 Nature</td>
+              <td data-label="제목">
+                <a href="#" target="_blank">Defective autophagy in GNE myopathy rescued by PI3K inhibition</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 전체 데이터 -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">
+      <div class="collapsible-title">
+        📊 전체 데이터 시각화 (차트 + 논문 35건)
+      </div>
+      <div class="collapsible-icon">▼</div>
+    </div>
+    <div class="collapsible-content">
+      <div class="collapsible-body">
+        
+        <!-- 차트 그리드 -->
+        <div class="grid-2">
+          <div class="card">
+            <h3>연도별 출판 추이</h3>
+            <div class="chart-container">
+              <canvas id="yearChart"></canvas>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>임상시험 Status 분포</h3>
+            <div class="chart-container">
+              <canvas id="statusChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- 전체 논문 목록 -->
+        <div class="card">
+          <h3>🔬 전체 논문 35건 (2025년 이후)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>날짜</th>
+                <th>제목</th>
+                <th>저널</th>
+                <th>관련도</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="날짜">2026-04-10</td>
+                <td data-label="제목">Defective autophagy in GNE myopathy...</td>
+                <td data-label="저널">Exp Mol Med</td>
+                <td data-label="관련도"><span class="badge badge-score-10">10/10</span></td>
+              </tr>
+              <tr>
+                <td data-label="날짜">2026-03-28</td>
+                <td data-label="제목">Alternative Dosing Strategies...</td>
+                <td data-label="저널">Clin Drug Investig</td>
+                <td data-label="관련도"><span class="badge badge-score-10">10/10</span></td>
+              </tr>
+              <!-- 더 많은 논문... -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 임상시험 파이프라인 -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">
+      <div class="collapsible-title">
+        🧪 활성 임상시험 파이프라인 (22건)
+      </div>
+      <div class="collapsible-icon">▼</div>
+    </div>
+    <div class="collapsible-content">
+      <div class="collapsible-body">
+        <table>
+          <thead>
+            <tr>
+              <th>NCT ID</th>
+              <th>제목</th>
+              <th>Status</th>
+              <th>Phase</th>
+              <th>시작일</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="NCT ID">
+                <a href="https://clinicaltrials.gov/study/NCT06664814" target="_blank">NCT06664814</a>
+              </td>
+              <td data-label="제목">ManNAc Open-Label Phase 2</td>
+              <td data-label="Status">
+                <span class="badge badge-success">모집 중</span>
+              </td>
+              <td data-label="Phase">Phase 2</td>
+              <td data-label="시작일">2026-05-10</td>
+            </tr>
+            <tr>
+              <td data-label="NCT ID">
+                <a href="https://clinicaltrials.gov/study/NCT07511556" target="_blank">NCT07511556</a>
+              </td>
+              <td data-label="제목">UX016 First-in-human Study</td>
+              <td data-label="Status">
+                <span class="badge badge-info">모집 예정</span>
+              </td>
+              <td data-label="Phase">Phase 1/2</td>
+              <td data-label="시작일">2026-10</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== -->
+  <!-- 💬 피드백 섹션        -->
+  <!-- ==================== -->
+  <div class="feedback-section">
+    <div class="feedback-title">💬 이번 주 뉴스레터 어땠나요?</div>
+    <div class="feedback-buttons">
+      <button class="feedback-btn" onclick="sendFeedback('useful')">
+        👍 유용했어요
+      </button>
+      <button class="feedback-btn" onclick="sendFeedback('meh')">
+        😐 별로였어요
+      </button>
+      <button class="feedback-btn" onclick="sendFeedback('suggest')">
+        💡 제안 있어요
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==================== -->
+<!-- 푸터                  -->
+<!-- ==================== -->
+<div class="footer">
+  <p>
+    📧 피드백: <a href="mailto:feedback@gne-newsletter.org">feedback@gne-newsletter.org</a> |
+    🌐 과거 리포트: <a href="#">아카이브 보기</a>
+  </p>
+  <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+    GNE 근병증 환우회 × AI 자동 뉴스레터<br>
+    매주 월요일 아침 최신 연구 소식을 전해드립니다
+  </p>
+</div>
+
+<!-- ==================== -->
+<!-- JavaScript            -->
+<!-- ==================== -->
+<script>
+  // 접기/펼치기 토글
+  function toggleCollapse(element) {
+    const collapsible = element.parentElement;
+    collapsible.classList.toggle('open');
+  }
+
+  // 피드백 전송
+  function sendFeedback(type) {
+    alert(`피드백 감사합니다: ${type}`);
+    // 실제로는 서버나 Google Forms로 전송
+  }
+
+  // 차트 생성
+  window.addEventListener('load', function() {
+    // 연도별 출판 추이
+    const yearCtx = document.getElementById('yearChart');
+    if (yearCtx) {
+      new Chart(yearCtx, {
+        type: 'line',
+        data: {
+          labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2026'],
+          datasets: [{
+            label: '논문 발표 수',
+            data: [3, 5, 7, 8, 6, 4, 2],
+            borderColor: '#8b5cf6',
+            backgroundColor: 'rgba(139, 92, 246, 0.1)',
+            tension: 0.4,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+    }
+
+    // 임상시험 Status 분포
+    const statusCtx = document.getElementById('statusChart');
+    if (statusCtx) {
+      new Chart(statusCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['모집 중', '진행 중', '완료', '모집 예정'],
+          datasets: [{
+            data: [3, 8, 7, 4],
+            backgroundColor: [
+              '#22c55e',
+              '#f59e0b',
+              '#6b7280',
+              '#3b82f6'
+            ]
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

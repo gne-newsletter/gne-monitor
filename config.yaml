@@ -1,5 +1,5 @@
 app:
-  name: GNE 근병증 모니터링 시스템
+  name: GNE 근육병 모니터링 시스템
   version: "0.1.0"
   language: ko
   timezone: Asia/Seoul
@@ -145,19 +145,23 @@ news:
 
   feeds:
     - label: google_news_en
-      url: "https://news.google.com/rss/search?q=GNE+myopathy&hl=en&gl=US&ceid=US:en"
+      url: "https://news.google.com/rss/search?q=%22GNE+myopathy%22&hl=en&gl=US&ceid=US:en"
       language: en
 
     - label: google_news_ko
-      url: "https://news.google.com/rss/search?q=GNE+%EA%B7%BC%EB%B3%91%EC%A6%9D&hl=ko&gl=KR&ceid=KR:ko"
+      url: "https://news.google.com/rss/search?q=%22GNE+%EA%B7%BC%EB%B3%91%EC%A6%9D%22&hl=ko&gl=KR&ceid=KR:ko"
       language: ko
 
-    - label: google_news_hibm
-      url: "https://news.google.com/rss/search?q=HIBM+hereditary+inclusion+body+myopathy&hl=en&gl=US&ceid=US:en"
+    - label: google_news_hibm_1
+      url: "https://news.google.com/rss/search?q=%22HIBM%22&hl=en&gl=US&ceid=US:en"
+      language: en
+
+    - label: google_news_hibm_2
+      url: "https://news.google.com/rss/search?q=%22hereditary+inclusion+body+myopathy%22&hl=en&gl=US&ceid=US:en"
       language: en
 
     - label: google_news_ultragenyx
-      url: "https://news.google.com/rss/search?q=Ultragenyx+UX016+GNEM&hl=en&gl=US&ceid=US:en"
+      url: "https://news.google.com/rss/search?q=%22Ultragenyx%22+AND+%28%22UX016%22+OR+%22GNEM%22%29&hl=en&gl=US&ceid=US:en"
       language: en
 
   storage:
@@ -241,6 +245,7 @@ pubmed:
          "HIBM"[Title/Abstract] OR
          "distal myopathy with rimmed vacuoles"[Title/Abstract] OR
          "DMRV"[Title/Abstract])
+        AND 2025[PDAT]:3000[PDAT]
       max_results: 2000
 
     - label: gne_gene_variants
@@ -249,6 +254,7 @@ pubmed:
          "UDP-GlcNAc 2-epimerase"[Title/Abstract] OR
          "ManNAc kinase"[Title/Abstract])
         AND myopathy[Title/Abstract]
+        AND 2025[PDAT]:3000[PDAT]
       max_results: 500
 
     - label: gne_treatment
@@ -257,6 +263,7 @@ pubmed:
         AND (treatment[Title/Abstract] OR therapy[Title/Abstract] OR
              "sialic acid"[Title/Abstract] OR "ManNAc"[Title/Abstract] OR
              "gene therapy"[Title/Abstract] OR clinical[Title/Abstract])
+        AND 2025[PDAT]:3000[PDAT]
       max_results: 300
 
   fetch:
