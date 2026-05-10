@@ -440,25 +440,6 @@ def _write_html(report: dict, path: Path):
     if not quick_items_html:
         quick_items_html = '<div class="quick-item"><div class="quick-summary" style="color:#94a3b8">AI 요약 데이터 없음 — python3 analyze.py summarize 실행 필요</div></div>'
 
-    # ── 행동 가이드: 모집 중인 임상시험 ──────────────────────────────
-    recruiting = [t for t in active if t.get("overall_status") in ("RECRUITING", "NOT_YET_RECRUITING")]
-    action_items_html = ""
-    for t in recruiting[:2]:
-        phases = "/".join(t.get("phases", [])) or "N/A"
-        action_items_html += f"""
-    <div class="action-item">
-      <div class="action-label">✅ {STATUS_KR.get(t['overall_status'], t['overall_status'])} 임상시험</div>
-      <div class="action-content">
-        <strong>{t['nct_id']}</strong> — {t['brief_title'][:70]}<br>
-        Phase {phases} · {t['lead_sponsor'][:40]}
-        {f"<br>시작일: {t['start_date']}" if t.get('start_date') else ""}
-      </div>
-      <a href="https://clinicaltrials.gov/study/{t['nct_id']}" target="_blank" class="action-button">자세히 보기 →</a>
-    </div>"""
-
-    if not action_items_html:
-        action_items_html = '<div class="action-item"><div class="action-content">현재 모집 중인 임상시험이 없습니다.</div></div>'
-
     # ── Collapsible 1: 뉴스 ───────────────────────────────────────────
     news_rows = ""
     for n in news_recent[:15]:
@@ -671,30 +652,6 @@ def _write_html(report: dict, path: Path):
     .quick-title {{ font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; color: var(--text-primary); }}
     .quick-summary {{ font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }}
 
-    /* ── 행동 가이드 ── */
-    .action-guide {{
-      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-      border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;
-    }}
-    .action-title {{ font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; }}
-    .action-item {{
-      background: white; border-radius: 8px;
-      padding: 1rem; margin-bottom: 0.75rem; box-shadow: var(--shadow);
-    }}
-    .action-item:last-child {{ margin-bottom: 0; }}
-    .action-label {{
-      font-weight: 600; color: var(--text-primary);
-      margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;
-    }}
-    .action-content {{ color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; }}
-    .action-button {{
-      display: inline-block; background: var(--primary); color: white;
-      padding: 0.5rem 1rem; border-radius: 6px;
-      font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem;
-      cursor: pointer; border: none; transition: background 0.2s;
-    }}
-    .action-button:hover {{ background: var(--primary-dark); text-decoration: none; color: white; }}
-
     /* ── ZONE 3: Collapsible (10분) ── */
     .collapsible {{ margin-bottom: 1.5rem; }}
     .collapsible-header {{
@@ -860,12 +817,6 @@ def _write_html(report: dict, path: Path):
     <div class="quick-scan-grid">
       {quick_items_html}
     </div>
-  </div>
-
-  <!-- ── 행동 가이드 ── -->
-  <div class="action-guide">
-    <div class="action-title">🏥 이번 주 행동 가이드</div>
-    {action_items_html}
   </div>
 
   <!-- ══ ZONE 3: 10분 심층 탐색 (접기/펼치기) ══ -->
