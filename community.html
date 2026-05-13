@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GNE 근육병환우회 - GNE 근육병 뉴스레터</title>
+  <title>환우회 소개 - 한국GNE근육병환우회</title>
   <style>
     :root {
       --bg: #f5f7fb;
@@ -12,118 +12,299 @@
       --sub: #64748b;
       --line: #e2e8f0;
       --primary: #3b82f6;
+      --primary-soft: #dbeafe;
       --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      --radius: 20px;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
     a { text-decoration: none; color: inherit; }
 
     .container {
-      width: min(1120px, calc(100% - 40px));
+      width: min(860px, calc(100% - 40px));
       margin: 0 auto;
     }
 
+    /* ── Header ── */
     header {
-      padding: 28px 0;
+      padding: 22px 0;
       border-bottom: 1px solid var(--line);
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1rem; font-weight: 700; color: var(--primary); }
+    .nav-links { display: flex; gap: 24px; font-size: 0.9rem; color: var(--sub); }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-links a.active { color: var(--primary); font-weight: 600; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #0f4c81 0%, #1d6fa4 60%, #2563eb 100%);
+      color: white;
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 100px;
+      padding: 6px 18px;
+      font-size: 0.82rem;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .hero p { font-size: 1.05rem; opacity: 0.85; max-width: 520px; margin: 0 auto; }
+    .founded-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 0.88rem;
+      margin-top: 28px;
     }
 
-    .nav {
+    /* ── Section nav pills ── */
+    .section-nav {
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .section-nav::-webkit-scrollbar { display: none; }
+    .section-nav-inner {
+      display: flex;
+      width: fit-content;
+      margin: 0 auto;
+    }
+    .section-nav a {
+      display: block;
+      padding: 14px 22px;
+      font-size: 0.88rem;
+      color: var(--sub);
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .section-nav a:hover { color: var(--primary); border-bottom-color: var(--primary-soft); }
+
+    /* ── Content ── */
+    .content { padding: 48px 0 100px; }
+
+    .block {
+      scroll-margin-top: 80px;
+      margin-bottom: 32px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .block.visible { opacity: 1; transform: translateY(0); }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 40px 44px;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .section-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .icon-blue { background: #dbeafe; }
+    .icon-green { background: #dcfce7; }
+    .icon-yellow { background: #fef9c3; }
+    .icon-purple { background: #f3e8ff; }
+
+    .card h2 { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; }
+
+    /* ── 소개 ── */
+    .mission-text {
+      font-size: 1.08rem;
+      line-height: 1.85;
+      border-left: 3px solid var(--primary);
+      padding-left: 20px;
+      margin-bottom: 28px;
+    }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .mission-item {
+      background: var(--bg);
+      border-radius: 12px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+    }
+    .mission-item .mi-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .mission-item p { font-size: 0.88rem; color: var(--sub); line-height: 1.6; }
+
+    /* ── 연혁 타임라인 ── */
+    .timeline-year {
+      margin-bottom: 36px;
+    }
+
+    .year-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .year-label {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--primary);
+    }
+    .year-theme {
+      font-size: 0.85rem;
+      color: var(--sub);
+      background: var(--primary-soft);
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    .tl-items {
+      position: relative;
+      padding-left: 28px;
+      border-left: 2px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .tl-item {
+      position: relative;
+    }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -35px;
+      top: 7px;
+      width: 10px; height: 10px;
+      background: var(--primary);
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    .tl-item.highlight::before {
+      background: #f59e0b;
+      box-shadow: 0 0 0 2px #f59e0b;
+      width: 12px; height: 12px;
+      left: -36px;
+      top: 6px;
+    }
+
+    .tl-date {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 3px;
+      letter-spacing: 0.02em;
+    }
+    .tl-title {
+      font-weight: 600;
+      font-size: 0.97rem;
+      margin-bottom: 3px;
+    }
+    .tl-desc {
+      font-size: 0.87rem;
+      color: var(--sub);
+      line-height: 1.6;
+    }
+    .tl-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      background: #fee2e2;
+      color: #b91c1c;
+      border-radius: 100px;
+      padding: 2px 10px;
+      margin-top: 5px;
+    }
+    .tl-tag.blue { background: var(--primary-soft); color: #1d4ed8; }
+    .tl-tag.green { background: #dcfce7; color: #15803d; }
+
+    /* ── 온라인 채널 ── */
+    .link-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .link-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .link-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+    .link-card-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--primary-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .link-card-title { font-weight: 700; font-size: 0.93rem; margin-bottom: 4px; }
+    .link-card-sub { font-size: 0.8rem; color: var(--sub); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 44px 0 60px;
+      border-top: 1px solid var(--line);
+      color: var(--sub);
+      font-size: 0.88rem;
+    }
+    .footer-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
-    .logo {
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      font-size: 0.95rem;
-      color: var(--sub);
-    }
-
-    .page-header {
-      padding: 80px 0;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin: 0 0 20px;
-      letter-spacing: -0.03em;
-    }
-
-    .page-subtitle {
-      color: var(--sub);
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .content {
-      padding: 60px 0 120px;
-    }
-
-    .coming-soon {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 60px 40px;
-      box-shadow: var(--shadow);
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .coming-soon-icon {
-      font-size: 4rem;
-      margin-bottom: 20px;
-    }
-
-    .coming-soon h2 {
-      font-size: 1.5rem;
-      margin: 0 0 12px;
-    }
-
-    .coming-soon p {
-      color: var(--sub);
-      margin-bottom: 28px;
-    }
-
-    .btn-back {
-      display: inline-block;
-      padding: 12px 24px;
-      background: var(--primary);
-      color: white;
-      border-radius: 8px;
-      font-weight: 600;
-    }
-
-    .footer {
-      padding: 50px 0 70px;
-      color: var(--sub);
-      font-size: 0.95rem;
-      border-top: 1px solid var(--line);
-    }
-
+    /* ── Responsive ── */
     @media (max-width: 720px) {
-      .nav {
-        flex-direction: column;
-        gap: 14px;
-      }
+      .nav { flex-direction: column; gap: 12px; }
+      .hero h1 { font-size: 1.8rem; }
+      .card { padding: 28px 22px; }
+      .mission-grid { grid-template-columns: 1fr; }
+      .link-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -131,45 +312,381 @@
 
   <header>
     <div class="container nav">
-      <div class="logo">GNE 근육병 뉴스레터</div>
+      <a href="index.html" class="logo">한국GNE근육병환우회</a>
       <nav class="nav-links">
         <a href="index.html">홈</a>
-        <a href="latest.html">최신 리포트</a>
+        <a href="about.html">GNE 근육병이란?</a>
+        <a href="community.html" class="active">환우회 소개</a>
         <a href="archive.html">아카이브</a>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section class="page-header">
-      <div class="container">
-        <h1>GNE 근육병환우회</h1>
-        <p class="page-subtitle">
-          환우회 소개, 활동 내용, 연락처 정보를 준비 중입니다.
-        </p>
-      </div>
-    </section>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">비영리단체</div>
+      <h1>한국GNE근육병환우회</h1>
+      <p>희귀·난치성 질환인 GNE 근육병을 세상에 알리고,<br>환우들의 권익 보호와 삶의 질 향상을 위해 함께합니다.</p>
+      <div class="founded-badge">⚑ 2016년 설립</div>
+    </div>
+  </section>
 
-    <section class="content">
-      <div class="container">
-        <div class="coming-soon">
-          <div class="coming-soon-icon">🤝</div>
-          <h2>콘텐츠 준비 중입니다</h2>
-          <p>
-            GNE 근육병환우회 정보와 커뮤니티 리소스를 준비하고 있습니다.<br>
-            조금만 기다려 주세요!
+  <nav class="section-nav">
+    <div class="section-nav-inner">
+      <a href="#intro">소개</a>
+      <a href="#history">연혁</a>
+      <a href="#channels">온라인 채널</a>
+    </div>
+  </nav>
+
+  <main class="content">
+    <div class="container">
+
+      <!-- 소개 -->
+      <div class="block" id="intro">
+        <div class="card">
+          <div class="section-label">
+            <div class="section-icon icon-blue">🤝</div>
+            <h2>환우회 소개</h2>
+          </div>
+          <p class="mission-text">
+            한국GNE근육병환우회는 희귀·난치성 질환인 GNE 근육병을 세상에 알리고, GNE 근육병 환우들의 권익 보호와 환우로서의 삶의 질 향상을 목표로 <strong>2016년</strong>에 만들어졌습니다.
           </p>
-          <a href="index.html" class="btn-back">홈으로 돌아가기</a>
+          <div class="mission-grid">
+            <div class="mission-item">
+              <div class="mi-title">질환 인식 향상</div>
+              <p>GNE 근육병을 사회에 알리고 올바른 정보를 제공합니다</p>
+            </div>
+            <div class="mission-item">
+              <div class="mi-title">권익 보호</div>
+              <p>환우들의 의료·복지 권리를 위해 함께 목소리를 냅니다</p>
+            </div>
+            <div class="mission-item">
+              <div class="mi-title">환우 교류</div>
+              <p>같은 질환을 가진 환우와 가족들이 서로 연결됩니다</p>
+            </div>
+            <div class="mission-item">
+              <div class="mi-title">치료 연구 지원</div>
+              <p>신약 개발 및 임상연구 정보를 공유하고 지원합니다</p>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+
+      <!-- 연혁 -->
+      <div class="block" id="history">
+        <div class="card">
+          <div class="section-label">
+            <div class="section-icon icon-yellow">📅</div>
+            <h2>연혁</h2>
+          </div>
+
+          <!-- 2016 -->
+          <div class="timeline-year">
+            <div class="year-header">
+              <span class="year-label">2016</span>
+              <span class="year-theme">창립</span>
+            </div>
+            <div class="tl-items">
+              <div class="tl-item">
+                <div class="tl-date">2016.09</div>
+                <div class="tl-title">일본 도호쿠대학 임상시험 참여 시도</div>
+                <div class="tl-desc">N-Acetylneuraminic acid (Neu5Ac) 임상시험 참여의사 전달 → 자국민만 참여대상으로 거절</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2016.10</div>
+                <div class="tl-title">미국 Ultragenyx Pharmaceutical 임상시험 참여 시도</div>
+                <div class="tl-desc">임상시험 한국진행 요청 → 동북 아시아 지역 제외로 거절</div>
+              </div>
+              <div class="tl-item highlight">
+                <div class="tl-date">2016.10.29</div>
+                <div class="tl-title">제1회 정기 모임 — 환우 32명</div>
+                <div class="tl-desc">한국 내의 환자 데이터를 만들기 위해 Treat-NMD와 협력, 한국의 GNE근육병 환우들을 모으기 시작함</div>
+                <span class="tl-tag green">창립 모임</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2017 -->
+          <div class="timeline-year">
+            <div class="year-header">
+              <span class="year-label">2017</span>
+              <span class="year-theme">환자 주도 임상 시작</span>
+            </div>
+            <div class="tl-items">
+              <div class="tl-item">
+                <div class="tl-date">2017.04</div>
+                <div class="tl-title">시알산 복용 여부 조사</div>
+                <div class="tl-desc">30여 명의 환자들에게 시알산 재복 복용 여부 조사</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2017.08.16</div>
+                <div class="tl-title">멕시코 Ventrine c9 환자 공동구매</div>
+                <div class="tl-desc">고농도 건강보조 시알산 공동구매 진행</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2017.08.24</div>
+                <div class="tl-title">LA NDF SYMPOSIUM 참석</div>
+                <div class="tl-desc">한국GNE근육병환우회 규모 전달</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2017.08.27</div>
+                <div class="tl-title">Ultragenyx 3상 임상시험 투자 중단 소식</div>
+                <div class="tl-desc">임상시험 이후 연구 및 투자중단 확인</div>
+              </div>
+              <div class="tl-item highlight">
+                <div class="tl-date">2017.08.30</div>
+                <div class="tl-title">환자 주도형 임상시험 진행 시작</div>
+                <span class="tl-tag blue">임상시험</span>
+              </div>
+              <div class="tl-item highlight">
+                <div class="tl-date">2017.10.14</div>
+                <div class="tl-title">제2회 정기 모임</div>
+                <span class="tl-tag green">정기 모임</span>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2017.10</div>
+                <div class="tl-title">Nobelpharma / Mannac 국제임상시험 소식</div>
+                <div class="tl-desc">임상 종료 후 데이터 분석, 제약회사 변경으로 지연</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2018 -->
+          <div class="timeline-year">
+            <div class="year-header">
+              <span class="year-label">2018</span>
+              <span class="year-theme">국제 네트워크 확장</span>
+            </div>
+            <div class="tl-items">
+              <div class="tl-item">
+                <div class="tl-date">2018.03.23</div>
+                <div class="tl-title">Ventrine c9 복용 환자 근력 검사</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2018.04</div>
+                <div class="tl-title">GNE근육병 치료제 임상개발 논의</div>
+                <div class="tl-desc">임상전 GNE근육병 치료제로서 만니시 규제 및 임상개발</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2018.05</div>
+                <div class="tl-title">Ventrine c9 체내 유지 농도 테스트 계속</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2018.06</div>
+                <div class="tl-title">NDF 환자 정보지 등록</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2018.07.21</div>
+                <div class="tl-title">뉴욕 NIH Mannac 임상시험 희망자 조사</div>
+                <div class="tl-desc">자부담 참여 희망자 조사 — 참여 불가 확인</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2018.08.20</div>
+                <div class="tl-title">인도 WWGM 환우회 회장단 미팅</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2018.08.30</div>
+                <div class="tl-title">LA NDF SYMPOSIUM 참여</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2018.10.08</div>
+                <div class="tl-title">Ventrine c9 복용 환자 근력 검사</div>
+              </div>
+              <div class="tl-item highlight">
+                <div class="tl-date">2018.10.20</div>
+                <div class="tl-title">제3회 정기 모임</div>
+                <span class="tl-tag green">정기 모임</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2018–2019 -->
+          <div class="timeline-year">
+            <div class="year-header">
+              <span class="year-label">2018–2019</span>
+              <span class="year-theme">시알릴락토스 임상시험 시작</span>
+            </div>
+            <div class="tl-items">
+              <div class="tl-item highlight">
+                <div class="tl-date">2018.12.21</div>
+                <div class="tl-title">시알릴락토스 임상시험 준비 — 한국 첫 시도</div>
+                <div class="tl-desc">양산부산대학교병원 신진홍 교수님과 시알산 수보물질 '시알릴락토스' 도움 간담회 / Ventrine c9 복용 종료</div>
+                <span class="tl-tag blue">임상시험</span>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2019.02</div>
+                <div class="tl-title">시알릴락토스 윤리위원회 심사 신청</div>
+              </div>
+              <div class="tl-item highlight">
+                <div class="tl-date">2019.03.12</div>
+                <div class="tl-title">시알릴락토스 연구자 주도 임상시험 시작</div>
+                <div class="tl-desc">1단계 용량반응시험</div>
+                <span class="tl-tag blue">임상시험</span>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2019.07</div>
+                <div class="tl-title">시알릴락토스 2단계 용량반응시험</div>
+              </div>
+              <div class="tl-item highlight">
+                <div class="tl-date">2019.10.26</div>
+                <div class="tl-title">제4회 정기 모임</div>
+                <span class="tl-tag green">정기 모임</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2020 -->
+          <div class="timeline-year">
+            <div class="year-header">
+              <span class="year-label">2020</span>
+              <span class="year-theme">COVID-19 속 온라인 활동</span>
+            </div>
+            <div class="tl-items">
+              <div class="tl-item">
+                <div class="tl-date">2020.02.01</div>
+                <div class="tl-title">Mannac 2단계 임상시험</div>
+                <span class="tl-tag blue">임상시험</span>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2020.02.11</div>
+                <div class="tl-title">시알릴락토스 3단계 1주차 임상시험</div>
+                <div class="tl-desc">체내농도유지</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2020.02.12</div>
+                <div class="tl-title">시알릴락토스 3단계 2주차 임상시험</div>
+                <div class="tl-desc">체내농도유지</div>
+              </div>
+              <div class="tl-item highlight">
+                <div class="tl-date">2020.05.18</div>
+                <div class="tl-title">제5회 정기 모임</div>
+                <div class="tl-desc">COVID-19로 온라인 모임 전환 — 온라인을 통해 환우들의 연대와 소통을 이어갔습니다.</div>
+                <span class="tl-tag green">정기 모임</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2020–2023 -->
+          <div class="timeline-year">
+            <div class="year-header">
+              <span class="year-label">2020–2023</span>
+              <span class="year-theme">장기복용 임상시험</span>
+            </div>
+            <div class="tl-items">
+              <div class="tl-item highlight">
+                <div class="tl-date">2020.08 – 2021.09</div>
+                <div class="tl-title">장기복용 임상시험 1차</div>
+                <div class="tl-desc">20명 참여</div>
+                <span class="tl-tag blue">임상시험</span>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2021.01.01 – 2023.04.30</div>
+                <div class="tl-title">일본 Nobelpharma 자국민 대상 시알산 임상시험</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2021.03.20</div>
+                <div class="tl-title">제6회 정기 총회 준비</div>
+                <div class="tl-desc">COVID-19로 온라인 모임</div>
+                <span class="tl-tag green">정기 모임</span>
+              </div>
+              <div class="tl-item highlight">
+                <div class="tl-date">2021.09 – 2023.07</div>
+                <div class="tl-title">장기복용 임상시험 연장 2차</div>
+                <div class="tl-desc">20명 참여</div>
+                <span class="tl-tag blue">임상시험</span>
+              </div>
+              <div class="tl-item highlight">
+                <div class="tl-date">2021.10.02</div>
+                <div class="tl-title">제6회 정기 모임</div>
+                <span class="tl-tag green">정기 모임</span>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2022.04 – 2023.12</div>
+                <div class="tl-title">위약 장기복용 임상시험</div>
+                <div class="tl-desc">11명 참여</div>
+                <span class="tl-tag blue">임상시험</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2022–2025 -->
+          <div class="timeline-year">
+            <div class="year-header">
+              <span class="year-label">2022–2025</span>
+              <span class="year-theme">최근 활동</span>
+            </div>
+            <div class="tl-items">
+              <div class="tl-item highlight">
+                <div class="tl-date">2023.04.18</div>
+                <div class="tl-title">제8회 정기 모임 및 정기 총회</div>
+                <span class="tl-tag green">정기 총회</span>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">2023.06.30</div>
+                <div class="tl-title">GNE근육병 정보제공 및 권익옹호를 위한 의료세미나</div>
+              </div>
+              <div class="tl-item highlight">
+                <div class="tl-date">2024.04.06</div>
+                <div class="tl-title">제9회 정기 모임 및 정기 총회</div>
+                <span class="tl-tag green">정기 총회</span>
+              </div>
+              <div class="tl-item highlight">
+                <div class="tl-date">2025.04.05</div>
+                <div class="tl-title">제10회 정기 모임 및 정기 총회</div>
+                <span class="tl-tag green">정기 총회</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /card -->
+      </div><!-- /block -->
+
+      <!-- 온라인 채널 -->
+      <div class="block" id="channels">
+        <div class="card">
+          <div class="section-label">
+            <div class="section-icon icon-green">🔗</div>
+            <h2>온라인 채널</h2>
+          </div>
+          <div class="link-grid">
+            <a href="https://cafe.naver.com/gnemkorea" target="_blank" class="link-card">
+              <div class="link-card-icon">💬</div>
+              <div>
+                <div class="link-card-title">네이버 카페</div>
+                <div class="link-card-sub">cafe.naver.com/gnemkorea</div>
+              </div>
+            </a>
+            <a href="https://blog.naver.com/gnem2016" target="_blank" class="link-card">
+              <div class="link-card-icon">✏️</div>
+              <div>
+                <div class="link-card-title">네이버 블로그</div>
+                <div class="link-card-sub">blog.naver.com/gnem2016</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </main>
 
-  <footer class="footer">
+  <footer>
     <div class="container">
-      <div>GNE 근육병 뉴스레터 프로젝트</div>
+      <div class="footer-inner">
+        <div>한국GNE근육병환우회 · <a href="about.html" style="color:var(--primary)">GNE 근육병이란?</a></div>
+        <div style="font-size:0.82rem; color:var(--sub);">2016년 설립 · 비영리단체</div>
+      </div>
     </div>
   </footer>
+
+  <script>
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.08 }
+    );
+    document.querySelectorAll('.block').forEach(s => observer.observe(s));
+  </script>
 
 </body>
 </html>

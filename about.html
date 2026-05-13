@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GNE 근육병이란? - GNE 근육병 뉴스레터</title>
+  <title>GNE 근육병이란? - 한국GNE근육병환우회</title>
   <style>
     :root {
       --bg: #f5f7fb;
@@ -12,29 +12,35 @@
       --sub: #64748b;
       --line: #e2e8f0;
       --primary: #3b82f6;
+      --primary-soft: #dbeafe;
       --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      --radius: 20px;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
     a { text-decoration: none; color: inherit; }
 
     .container {
-      width: min(1120px, calc(100% - 40px));
+      width: min(860px, calc(100% - 40px));
       margin: 0 auto;
     }
 
+    /* Header */
     header {
-      padding: 28px 0;
+      padding: 22px 0;
       border-bottom: 1px solid var(--line);
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .nav {
@@ -44,86 +50,261 @@
     }
 
     .logo {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--primary);
     }
 
     .nav-links {
       display: flex;
-      gap: 18px;
-      font-size: 0.95rem;
+      gap: 24px;
+      font-size: 0.9rem;
       color: var(--sub);
     }
 
-    .page-header {
-      padding: 80px 0;
+    .nav-links a:hover { color: var(--primary); }
+    .nav-links a.active { color: var(--primary); font-weight: 600; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+      color: white;
+      padding: 80px 0 60px;
       text-align: center;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin: 0 0 20px;
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
       letter-spacing: -0.03em;
+      margin-bottom: 16px;
     }
 
-    .page-subtitle {
+    .hero p {
+      font-size: 1.05rem;
+      opacity: 0.85;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 100px;
+      padding: 6px 18px;
+      font-size: 0.82rem;
+      margin-bottom: 24px;
+      letter-spacing: 0.02em;
+    }
+
+    /* Section nav pills */
+    .section-nav {
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      padding: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .section-nav::-webkit-scrollbar { display: none; }
+
+    .section-nav-inner {
+      display: flex;
+      gap: 0;
+      width: fit-content;
+      margin: 0 auto;
+    }
+
+    .section-nav a {
+      display: block;
+      padding: 14px 22px;
+      font-size: 0.88rem;
       color: var(--sub);
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
     }
 
+    .section-nav a:hover {
+      color: var(--primary);
+      border-bottom-color: var(--primary-soft);
+    }
+
+    /* Summary box */
+    .summary-box {
+      background: var(--primary-soft);
+      border-left: 4px solid var(--primary);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin: 48px 0 0;
+      font-size: 0.97rem;
+    }
+
+    .summary-box strong {
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .alias-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .alias-tag {
+      background: white;
+      border: 1px solid #bfdbfe;
+      border-radius: 100px;
+      padding: 4px 14px;
+      font-size: 0.82rem;
+      color: #1d4ed8;
+    }
+
+    /* Content sections */
     .content {
-      padding: 60px 0 120px;
+      padding: 24px 0 100px;
     }
 
-    .coming-soon {
+    .section {
       background: var(--card);
+      border-radius: var(--radius);
       border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 60px 40px;
       box-shadow: var(--shadow);
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto;
+      padding: 40px 44px;
+      margin-top: 28px;
+      scroll-margin-top: 80px;
     }
 
-    .coming-soon-icon {
-      font-size: 4rem;
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       margin-bottom: 20px;
     }
 
-    .coming-soon h2 {
-      font-size: 1.5rem;
-      margin: 0 0 12px;
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
     }
 
-    .coming-soon p {
+    .icon-blue { background: #dbeafe; }
+    .icon-green { background: #dcfce7; }
+    .icon-orange { background: #ffedd5; }
+    .icon-purple { background: #f3e8ff; }
+    .icon-red { background: #fee2e2; }
+    .icon-gray { background: #f1f5f9; }
+
+    .section h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .section p {
+      color: var(--text);
+      font-size: 0.97rem;
+      margin-bottom: 14px;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    /* Key point highlight */
+    .highlight {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-size: 0.93rem;
       color: var(--sub);
-      margin-bottom: 28px;
+      border: 1px solid var(--line);
     }
 
-    .btn-back {
-      display: inline-block;
-      padding: 12px 24px;
-      background: var(--primary);
-      color: white;
-      border-radius: 8px;
-      font-weight: 600;
+    /* Reference */
+    .references {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      padding: 28px 44px;
+      margin-top: 28px;
     }
 
-    .footer {
-      padding: 50px 0 70px;
+    .references h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
       color: var(--sub);
-      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .references ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .references li {
+      font-size: 0.88rem;
+      color: var(--sub);
+      padding: 5px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .references li:last-child { border-bottom: none; }
+
+    .references a {
+      color: var(--primary);
+    }
+
+    .references a:hover { text-decoration: underline; }
+
+    /* Footer */
+    footer {
+      padding: 44px 0 60px;
       border-top: 1px solid var(--line);
+      color: var(--sub);
+      font-size: 0.88rem;
     }
 
+    footer .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Responsive */
     @media (max-width: 720px) {
-      .nav {
-        flex-direction: column;
-        gap: 14px;
-      }
+      .nav { flex-direction: column; gap: 12px; }
+      .hero h1 { font-size: 1.8rem; }
+      .section { padding: 28px 24px; }
+      .references { padding: 24px; }
+      footer .footer-inner { flex-direction: column; gap: 8px; }
+    }
+
+    /* Scroll animation */
+    .section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
@@ -131,45 +312,190 @@
 
   <header>
     <div class="container nav">
-      <div class="logo">GNE 근육병 뉴스레터</div>
+      <a href="index.html" class="logo">한국GNE근육병환우회</a>
       <nav class="nav-links">
         <a href="index.html">홈</a>
-        <a href="latest.html">최신 리포트</a>
+        <a href="about.html" class="active">GNE 근육병이란?</a>
+        <a href="community.html">환우회 소개</a>
         <a href="archive.html">아카이브</a>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section class="page-header">
-      <div class="container">
-        <h1>GNE 근육병이란?</h1>
-        <p class="page-subtitle">
-          GNE 근육병의 원인, 증상, 진단, 치료에 대한 정보를 준비 중입니다.
-        </p>
-      </div>
-    </section>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">희귀 유전성 근육병</div>
+      <h1>GNE 근육병이란?</h1>
+      <p>GNE 유전자의 이상으로 인해 발생하는 유전성 근육병으로,<br>정확한 정보로 이 질환을 바르게 이해합니다.</p>
+    </div>
+  </section>
 
-    <section class="content">
-      <div class="container">
-        <div class="coming-soon">
-          <div class="coming-soon-icon">🔬</div>
-          <h2>콘텐츠 준비 중입니다</h2>
-          <p>
-            GNE 근육병에 대한 포괄적이고 이해하기 쉬운 설명을 준비하고 있습니다.<br>
-            조금만 기다려 주세요!
-          </p>
-          <a href="index.html" class="btn-back">홈으로 돌아가기</a>
+  <nav class="section-nav">
+    <div class="section-nav-inner">
+      <a href="#summary">요약</a>
+      <a href="#definition">정의</a>
+      <a href="#cause">원인</a>
+      <a href="#symptoms">증상</a>
+      <a href="#diagnosis">진단/검사</a>
+      <a href="#treatment">치료</a>
+      <a href="#prognosis">경과</a>
+    </div>
+  </nav>
+
+  <main class="content">
+    <div class="container">
+
+      <!-- Summary -->
+      <div class="summary-box" id="summary">
+        <strong>한 줄 요약</strong>
+        GNE 근육병은 GNE 유전자의 이상으로 시알산 합성이 저하되어 발생하는 유전성 근육병입니다. 주로 20~40세에 발병하며 남녀 동일한 비율로 영향을 받습니다.
+        <div class="alias-tags">
+          <span class="alias-tag">GNEM</span>
+          <span class="alias-tag">노나카근육병 (Nonaka)</span>
+          <span class="alias-tag">hIBM (봉입체근육병)</span>
+          <span class="alias-tag">DMRV</span>
+          <span class="alias-tag">QSM</span>
         </div>
       </div>
-    </section>
+
+      <!-- 정의 -->
+      <div class="section" id="definition">
+        <div class="section-label">
+          <div class="section-icon icon-blue">🔬</div>
+          <h2>정의</h2>
+        </div>
+        <p>
+          GNE는 <strong>GlcNAc 2-epimerase / ManNAc kinase</strong>의 약어로, 근육을 형성하는 과정에서 필요한 효소를 말합니다. 이 효소의 결핍으로 발생하는 병이라는 의미에서 GNE 근육병이라 명명되었습니다.
+        </p>
+        <p>
+          GNE 근육병은 일본의 <strong>노나카 박사</strong>와 이스라엘의 <strong>알고프 박사</strong>가 각각 독립적으로 연구해 왔습니다. 노나카 박사는 정강이 근육이 약해지는 점과 테두리 공포가 보이는 것을 특징으로 보아 <em>DMRV(테두리 공포 먼 쪽 근육병)</em>라 이름 붙였고, 알고프 박사는 허벅지 사두근이 잘 보존되는 것을 특징으로 보아 <em>QSM(사두근보존 봉입체근육병)</em>이라 명명했습니다.
+        </p>
+        <div class="highlight">
+          이후 두 질환이 모두 GNE 유전자에 의해 발생하는 같은 근육병임이 밝혀져, 현재는 <strong>GNE 근육병</strong>이라는 용어로 통일하여 사용하고 있습니다.
+        </div>
+      </div>
+
+      <!-- 원인 -->
+      <div class="section" id="cause">
+        <div class="section-label">
+          <div class="section-icon icon-green">🧬</div>
+          <h2>원인</h2>
+        </div>
+        <p>
+          GNE 근육병은 <strong>GNE 유전자의 돌연변이</strong>에 의해 발생합니다. GNE 유전자는 체내에서 <strong>시알산(Sialic acid)</strong>이라는 물질의 합성 속도를 결정하는 두 가지 효소 활성을 담당합니다.
+        </p>
+        <p>
+          GNE 유전자에 이상이 생기면 시알산 합성이 저하되고, 근육의 당단백 이상을 통해 근육세포의 기능 장애 및 퇴화가 일어납니다. 실제로 GNE 유전자 이상을 가진 생쥐에게 시알산을 투여하면 근육병이 발생하지 않은 것이 관찰되었습니다.
+        </p>
+        <div class="highlight">
+          유전 형태는 <strong>상염색체 열성</strong>입니다. 부모는 증상이 없더라도 각각 한 개씩의 변이 유전자를 보유할 수 있으며, 두 변이가 합쳐질 때 질환이 발생합니다. 한 개의 변이만으로는 발병하지 않습니다.
+        </div>
+      </div>
+
+      <!-- 증상 -->
+      <div class="section" id="symptoms">
+        <div class="section-label">
+          <div class="section-icon icon-orange">🦵</div>
+          <h2>증상</h2>
+        </div>
+        <p>
+          GNE 근육병은 평균적으로 <strong>20~40대</strong>에 발병합니다. 발병 후 10~20년 정도 지나면 근육 감소가 현저하게 진행되어 심한 기능 장애를 동반합니다.
+        </p>
+        <p>
+          <strong>초기 증상</strong>은 앞쪽 정강근의 약화로 나타납니다. 발목이 처져 들어올리기 힘들어지고, 발끝이 끌리거나 걸음걸이가 달라지는 것이 첫 신호입니다.
+        </p>
+        <p>
+          <strong>진행 시</strong> 몸의 안정성이 감소하여 자주 넘어지고, 뛸 수 없으며, 계단을 오르거나 앉은 자리에서 일어서기 어려워집니다. 사지 근육 중 상대적으로 <strong>대퇴사두근(허벅지 앞쪽)</strong>은 비교적 오래 보존되는 특징이 있습니다.
+        </p>
+        <div class="highlight">
+          심장근육이나 호흡근은 일반적으로 영향을 받지 않으며, 말하기와 삼키기 기능도 유지됩니다.
+        </div>
+      </div>
+
+      <!-- 진단/검사 -->
+      <div class="section" id="diagnosis">
+        <div class="section-label">
+          <div class="section-icon icon-purple">🩺</div>
+          <h2>진단 / 검사</h2>
+        </div>
+        <p>
+          발처짐(족하수증)과 말단 사지 근육 약화를 보이는 환자는 GNE 근육병 검사를 받기에 적합한 후보입니다.
+        </p>
+        <p>
+          <strong>유전자 검사</strong>가 가장 이상적인 기본 검사입니다. 침습적 절차 없이 혈액 검사만으로 며칠 안에 결과를 확인할 수 있습니다.
+        </p>
+        <div class="highlight">
+          돌연변이 유전자가 반드시 효소 기능 문제를 야기하는 것은 아니기 때문에, 다른 병리적 요인을 배제하고 진단을 확정하기 위해 추가로 <strong>근육 생검</strong>이 필요한 경우도 있습니다.
+        </div>
+      </div>
+
+      <!-- 치료 -->
+      <div class="section" id="treatment">
+        <div class="section-label">
+          <div class="section-icon icon-red">💊</div>
+          <h2>치료</h2>
+        </div>
+        <p>
+          현재 GNE 근육병에 대한 효과적인 치료법은 없으며, 치료는 <strong>증상을 관리하는 보존적 치료</strong>에 국한되어 있습니다.
+        </p>
+        <p>
+          조기 진단은 환자가 최적의 치료를 받고 질병의 진행을 늦추는 데 중요한 역할을 합니다. 장기간의 격렬한 움직임과 과도한 근육 사용은 오히려 병의 진행을 가속화할 수 있습니다.
+        </p>
+        <div class="highlight">
+          <strong>물리치료</strong>와 균형 잡힌 신체 활동이 병의 진행을 늦추는 데 도움이 될 수 있습니다. 신경과 및 근골격계 전문의의 정기적인 검진을 통해 근육 강도와 일상생활 활동 능력을 정기적으로 평가받는 것이 중요합니다.
+        </div>
+        <p>
+          현재 유전자 대체 치료 및 유전자 기반 치료 기법을 포함한 여러 잠재적 치료법의 <strong>전임상 및 임상 연구</strong>가 진행 중입니다.
+        </p>
+      </div>
+
+      <!-- 경과/합병증 -->
+      <div class="section" id="prognosis">
+        <div class="section-label">
+          <div class="section-icon icon-gray">📈</div>
+          <h2>경과 / 합병증</h2>
+        </div>
+        <p>
+          GNE 근육병은 수십 년에 걸쳐 천천히 진행됩니다.
+        </p>
+        <div class="highlight">
+          대략 발병 후 <strong>10년</strong>이 경과하면 독립 보행이 어려워지며, <strong>30년</strong>이 경과하면 사지 기능이 심각하게 손상되어 일상생활의 독립성도 잃게 됩니다.
+        </div>
+        <p>
+          가장 오래 유지되는 기능은 <strong>손의 근력</strong>으로, 개인 위생과 식사 능력은 질환의 후기까지도 유지되는 경우가 많습니다.
+        </p>
+      </div>
+
+      <!-- 참고문헌 -->
+      <div class="references">
+        <h3>참고 문헌 및 자료</h3>
+        <ul>
+          <li>박영은 등. Journal of Clinical Neurology, 2019</li>
+          <li><a href="https://cafe.naver.com/gnemkorea" target="_blank">한국GNE근육병환우회 네이버 카페</a></li>
+          <li><a href="https://treat-nmd.org/treat-nmd-diseases/gne-myopathy/" target="_blank">TREAT-NMD: GNE Myopathy</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4394625/" target="_blank">NCBI PubMed — GNE Myopathy Review</a></li>
+        </ul>
+      </div>
+
+    </div>
   </main>
 
-  <footer class="footer">
+  <footer>
     <div class="container">
-      <div>GNE 근육병 뉴스레터 프로젝트</div>
+      <div class="footer-inner">
+        <div>한국GNE근육병환우회 · <a href="community.html" style="color:var(--primary)">환우회 소개</a></div>
+        <div style="font-size:0.82rem;">문의: <a href="mailto:" style="color:var(--primary)">이메일</a></div>
+      </div>
     </div>
   </footer>
+
+  <script>
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.section').forEach(s => observer.observe(s));
+  </script>
 
 </body>
 </html>
