@@ -353,7 +353,7 @@
   <!-- ══ ZONE 3: 10분 심층 탐색 (접기/펼치기) ══ -->
 
   <!-- Collapsible 1: 뉴스 -->
-  <div class="collapsible">
+  <div class="collapsible" id="news-section">
     <div class="collapsible-header" onclick="toggleCollapse(this.parentElement)">
       <div class="collapsible-title">📰 최근 30일 뉴스 (19건)</div>
       <div class="collapsible-icon">▼</div>
@@ -399,7 +399,7 @@
   </div>
 
   <!-- Collapsible 2: 전체 데이터 시각화 + 논문 -->
-  <div class="collapsible">
+  <div class="collapsible" id="data-section">
     <div class="collapsible-header" onclick="toggleCollapse(this.parentElement)">
       <div class="collapsible-title">📊 전체 데이터 시각화 + 논문 목록</div>
       <div class="collapsible-icon">▼</div>
@@ -587,7 +587,7 @@
   </div>
 
   <!-- Collapsible 3: 임상시험 파이프라인 -->
-  <div class="collapsible">
+  <div class="collapsible" id="clinical-section">
     <div class="collapsible-header" onclick="toggleCollapse(this.parentElement)">
       <div class="collapsible-title">🧪 활성 임상시험 파이프라인 (3건)</div>
       <div class="collapsible-icon">▼</div>
@@ -689,6 +689,15 @@
     ACTIVE_NOT_RECRUITING:'#f59e0b', NOT_YET_RECRUITING:'#3b82f6',
     TERMINATED:'#ef4444', UNKNOWN:'#9ca3af',
   };
+
+  // 앵커로 진입 시 해당 collapsible 자동 펼치기
+  if (window.location.hash) {
+    var target = document.querySelector(window.location.hash);
+    if (target && target.classList.contains('collapsible')) {
+      target.classList.add('open');
+      setTimeout(function() { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+    }
+  }
 
   window.addEventListener('load', function() {
     new Chart(document.getElementById('yearChart'), {
