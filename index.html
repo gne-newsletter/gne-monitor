@@ -10,14 +10,16 @@
 
   <style>
     :root {
-      --bg: #f5f7fb;
+      --bg: #f0f4ff;
       --card: #ffffff;
       --text: #1e293b;
-      --sub: #64748b;
+      --sub: #475569;
       --line: #e2e8f0;
-      --primary: #3b82f6;
+      --primary: #2563eb;
       --primary-soft: #dbeafe;
-      --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      --accent: #10b981;
+      --purple: #7c3aed;
+      --shadow: 0 20px 40px rgba(37, 99, 235, 0.12);
       --radius: 22px;
     }
 
@@ -28,7 +30,7 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
+      background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
       color: var(--text);
       line-height: 1.7;
     }
@@ -72,7 +74,7 @@
 
     .hero-card {
       background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-      border: 1px solid var(--line);
+      border: 1px solid #c3d4ff;
       border-radius: 32px;
       padding: 56px;
       box-shadow: var(--shadow);
@@ -84,9 +86,15 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: url('assets/images/icons/스크린샷.png') center/contain no-repeat;
+      background: url('assets/images/icons/KGNEM심볼.png') center/contain no-repeat;
       opacity: 0.3;
       pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-card > * {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-badge {
@@ -94,12 +102,13 @@
       align-items: center;
       gap: 8px;
       padding: 8px 14px;
-      background: var(--primary-soft);
-      color: var(--primary);
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: white;
       border-radius: 999px;
       font-size: 0.9rem;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 22px;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
     }
 
     h1 {
@@ -107,6 +116,10 @@
       line-height: 1.15;
       margin: 0 0 24px;
       letter-spacing: -0.04em;
+      background: linear-gradient(90deg, #1e40af, #2563eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hero-text {
@@ -133,18 +146,25 @@
     }
 
     .btn-primary {
-      background: var(--primary);
+      background: linear-gradient(90deg, var(--primary), #3b82f6);
       color: white;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 14px 28px rgba(37, 99, 235, 0.4);
     }
 
     .btn-secondary {
       background: white;
       border: 1px solid var(--line);
       color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
     .section {
@@ -195,7 +215,7 @@
 
     .highlight {
       background: white;
-      border: 1px solid var(--line);
+      border: 1px solid #c3d4ff;
       border-radius: 28px;
       padding: 38px;
       box-shadow: var(--shadow);
@@ -209,12 +229,19 @@
     }
 
     .stat-card {
-      background: #ffffff;
-      border: 2px solid #94afc8;
+      border: none;
       border-radius: 18px;
       padding: 22px;
       text-align: center;
+      color: white;
     }
+
+    .stats-grid > a:nth-child(1) { background: rgba(37, 99, 235, 0.55); }
+    .stats-grid > a:nth-child(2) { background: rgba(14, 136, 192, 0.55); }
+    .stats-grid > a:nth-child(3) { background: rgba(10, 158, 138, 0.55); }
+    .stats-grid > a:nth-child(4) { background: rgba(16, 185, 129, 0.55); }
+
+    .stats-grid > a .stat-label { color: white; }
 
     .stat-card-link {
       display: flex;
@@ -227,18 +254,18 @@
     }
 
     .stat-card-link:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
-      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+      filter: brightness(1.1);
     }
 
     .stat-icon {
-      font-size: 1.8rem;
+      font-size: 3.4rem;
     }
 
     .stat-label {
-      font-size: 0.95rem;
-      font-weight: 600;
+      font-size: 1.3rem;
+      font-weight: 700;
       color: var(--text);
     }
 
@@ -365,6 +392,40 @@
     td { padding: 0.75rem; border-bottom: 1px solid var(--line); font-size: 0.9rem; vertical-align: top; }
     tr:hover { background: #f8fafc; }
 
+    @media (max-width: 680px) {
+      .paper-table { display: block; }
+      .paper-table thead { display: none; }
+      .paper-table tbody { display: block; }
+      .paper-table tr {
+        display: block;
+        border: 1px solid #c3d4ff;
+        border-radius: 14px;
+        padding: 14px 16px;
+        margin-bottom: 14px;
+        background: #fff;
+      }
+      .paper-table tr:hover { background: #fff; }
+      .paper-table td {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 5px 0;
+        border: none;
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+      .paper-table td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: var(--sub);
+        font-size: 0.82rem;
+        min-width: 52px;
+        flex-shrink: 0;
+        padding-top: 2px;
+      }
+      .paper-table .td-content { flex: 1; min-width: 0; }
+    }
+
     .badge {
       display: inline-block; padding: 0.25rem 0.75rem;
       border-radius: 9999px; font-size: 0.75rem; font-weight: 600;
@@ -414,7 +475,7 @@
   <header>
     <div class="container nav">
       <a href="index.html" class="logo">
-        <img src="assets/images/icons/가로로고.jpeg" alt="한국GNE근육병환우회" style="height:42px; display:block;">
+        <img src="assets/images/icons/KGNEM가로로고.png" alt="한국GNE근육병환우회" style="height:84px; display:block;">
       </a>
 
       <nav class="nav-links">
@@ -443,7 +504,6 @@
           <p class="hero-text">
             GNE 근육병 관련 논문, 임상시험, 유전자 치료, AI·바이오 기술 흐름을
             환자와 가족의 관점에서 쉽게 정리하는 독립 뉴스레터 프로젝트입니다.
-            복잡한 논문과 의료 정보를 조금 더 이해 가능한 언어로 연결하고자 합니다.
           </p>
 
           <div class="stats-grid">
@@ -465,7 +525,7 @@
 
             <a href="community.html" class="stat-card stat-card-link">
               <div class="stat-icon">🤝</div>
-              <div class="stat-label">환자 중심 정보 허브</div>
+              <div class="stat-label">환자중심 정보허브</div>
             </a>
 
           </div>
@@ -494,7 +554,7 @@
                 “어디를 수정해야 하는가” 문제를 해결할 가능성이 주목받고 있습니다.
               </p>
 
-              <a href="latest.html" class="card-link">관련 분석 읽기 →</a>
+              <a href="#data-section" onclick="openHomeSection('data-section'); return false;" class="card-link">관련 논문 보기 →</a>
             </div>
 
             <div class="card">
@@ -506,7 +566,7 @@
                 환자 커뮤니티에서도 기대가 커지고 있습니다.
               </p>
 
-              <a href="latest.html" class="card-link">임상 업데이트 보기 →</a>
+              <a href="#clinical-section" onclick="openHomeSection('clinical-section'); return false;" class="card-link">임상 업데이트 보기 →</a>
             </div>
 
           </div>
@@ -520,7 +580,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" style="padding-bottom:12px">
       <div class="container">
 
         <h2 class="section-title">이 프로젝트는 무엇을 목표로 하나요?</h2>
@@ -529,33 +589,6 @@
           단순 뉴스 번역을 넘어, 장기적으로 환자 중심 데이터와 지식을 축적하는 것을 목표로 합니다.
         </p>
 
-        <div class="grid">
-
-          <div class="card">
-            <h3>📖 연구 흐름 정리</h3>
-            <p>
-              논문과 임상시험을 환자와 가족이 이해하기 쉬운 언어로 정리합니다.
-            </p>
-            <a href="latest.html#data-section" class="card-link">논문 목록 · 데이터 보기 →</a>
-          </div>
-
-          <div class="card">
-            <h3>🧬 AI · 유전자 치료 추적</h3>
-            <p>
-              AlphaGenome, CRISPR, 유전자 치료 플랫폼 등 미래 기술 흐름을 꾸준히 기록합니다.
-            </p>
-            <a href="archive.html" class="card-link">이전 기록 보기 →</a>
-          </div>
-
-          <div class="card">
-            <h3>🤝 환자 중심 정보 허브</h3>
-            <p>
-              환자와 가족들이 다시 방문하고 싶은 신뢰 가능한 정보 공간을 만드는 것이 목표입니다.
-            </p>
-            <a href="about.html" class="card-link">프로젝트 소개 보기 →</a>
-          </div>
-
-        </div>
 
       </div>
     </section>
@@ -584,7 +617,7 @@
                 </div>
               </div>
               <div style="display:flex;flex-direction:column;gap:10px;flex-shrink:0">
-                <a href="latest.html" class="btn btn-primary" style="font-size:0.9rem;padding:10px 18px">리포트 전체 보기 →</a>
+                <a href="latest.html" class="btn btn-primary" style="font-size:0.9rem;padding:10px 18px">뉴스레터 보기 →</a>
                 <a href="archive.html" style="font-size:0.85rem;color:var(--sub);text-align:center">지난 리포트 보기</a>
               </div>
             </div>
@@ -597,27 +630,27 @@
               <ul style="list-style:none;padding:0;margin:0">
                 <li style="padding:14px 0;border-bottom:1px solid var(--line)">
                   <div style="font-size:0.8rem;color:var(--sub);margin-bottom:4px">2026-04-23 · 🇰🇷 뉴데일리경제</div>
-                  <a href="https://news.google.com/rss/articles/CBMie0FVX3lxTE1IUVlFWFpLamNiNm9rLXVEVVEtTXhlZmo0UlJBOXptbGtETVBDZlZEUjY2R21qS2pWVjVCak5IWU1zYWZiOTZCV0JWWGN3Q0lfRHMtMjlFN3VNTVlRbG8wb2xDLTkzaFZndnBybzg4V3dkNnB6WTlHRjBwcw?oc=5" target="_blank" style="color:var(--text);font-weight:500;font-size:0.95rem">숙명여대 김주미 교수팀, 희귀 근육질환 'GNE 근병증' 발병 원인 밝혀 … 치료후보로 '코판리시브' 제시</a>
+                  <a href="https://news.google.com/rss/articles/CBMie0FVX3lxTE1IUVlFWFpLamNiNm9rLXVEVVEtTXhlZmo0UlJBOXptbGtETVBDZlZEUjY2R21qS2pWVjVCak5IWU1zYWZiOTZCV0JWWGN3Q0lfRHMtMjlFN3VNTVlRbG8wb2xDLTkzaFZndnBybzg4V3dkNnB6WTlHRjBwcw?oc=5" target="_blank" style="color:var(--primary);font-weight:500;font-size:0.95rem">숙명여대 김주미 교수팀, 희귀 근육질환 'GNE 근병증' 발병 원인 밝혀 … 치료후보로 '코판리시브' 제시</a>
                 </li>
                 <li style="padding:14px 0;border-bottom:1px solid var(--line)">
                   <div style="font-size:0.8rem;color:var(--sub);margin-bottom:4px">2026-04-22 · 🇰🇷 중앙일보</div>
-                  <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTE5JZHRCZWdOTjRtTGVqaUh6S3hMWGl3YllEZ3FFOGRiaV9aM09LTWNFdl9BVjZGWWlCZ2RhNjdHNHdCbTY5QldDQ0VOeFpEMEk0WDVKZzZn?oc=5" target="_blank" style="color:var(--text);font-weight:500;font-size:0.95rem">숙명여대, GNE 근병증 병리 기전 규명</a>
+                  <a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTE5JZHRCZWdOTjRtTGVqaUh6S3hMWGl3YllEZ3FFOGRiaV9aM09LTWNFdl9BVjZGWWlCZ2RhNjdHNHdCbTY5QldDQ0VOeFpEMEk0WDVKZzZn?oc=5" target="_blank" style="color:var(--primary);font-weight:500;font-size:0.95rem">숙명여대, GNE 근병증 병리 기전 규명</a>
                 </li>
                 <li style="padding:14px 0;border-bottom:1px solid var(--line)">
                   <div style="font-size:0.8rem;color:var(--sub);margin-bottom:4px">2026-04-22 · 🇰🇷 약사공론</div>
-                  <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE05ai1XeDdYd1FXdUZaYllCZ05FRWZzcDJYSFRUcENkZkt6TC1BeDR6ZVZ2R2dRdFlCaGtpRVhVZVgwZ3FTUkc0VzdMdnIzRkFHOTdDeXVQY09mNXNuSXdTUHNPWDBYQW9sYUZIVA?oc=5" target="_blank" style="color:var(--text);font-weight:500;font-size:0.95rem">숙명여대 약학부 김주미 교수팀, 희귀 근육질환 GNE 근병증 치료 실마리</a>
+                  <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE05ai1XeDdYd1FXdUZaYllCZ05FRWZzcDJYSFRUcENkZkt6TC1BeDR6ZVZ2R2dRdFlCaGtpRVhVZVgwZ3FTUkc0VzdMdnIzRkFHOTdDeXVQY09mNXNuSXdTUHNPWDBYQW9sYUZIVA?oc=5" target="_blank" style="color:var(--primary);font-weight:500;font-size:0.95rem">숙명여대 약학부 김주미 교수팀, 희귀 근육질환 GNE 근병증 치료 실마리</a>
                 </li>
                 <li style="padding:14px 0;border-bottom:1px solid var(--line)">
                   <div style="font-size:0.8rem;color:var(--sub);margin-bottom:4px">2026-04-21 · 🇰🇷 핀포인트뉴스</div>
-                  <a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE83d0dOQzRYclUyeU5EaWExeVRrYV92dFpaX1RHQWFaakxEUkN6OXlmUFYzbEplMjktNmJTLXUwdXVnTlE3NnVwcnFmVDdKQ2t6VDJoWEhLVXpnT3lQOWk0VlRGNjVOWHRPOHdoYkhyWGdZZW_SAXdBVV95cUxNUFBHUHFfT3FKajlwTXhSeGZDLUpTWm9WcXNWMFhHODZPXzI0bW1ZcFJwYTZlQXJaUDI0dlg2TkxrTDhDUXQzVk1LcmpFaElUOW41OFhrQnE5anVXeWlDV3hET0xQaGR3UWc2TVE4cU5NTUxPVnhFWQ?oc=5" target="_blank" style="color:var(--text);font-weight:500;font-size:0.95rem">숙명여대 연구팀, 희귀 근육질환 'GNE 근병증' 치료 단서 발견</a>
+                  <a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE83d0dOQzRYclUyeU5EaWExeVRrYV92dFpaX1RHQWFaakxEUkN6OXlmUFYzbEplMjktNmJTLXUwdXVnTlE3NnVwcnFmVDdKQ2t6VDJoWEhLVXpnT3lQOWk0VlRGNjVOWHRPOHdoYkhyWGdZZW_SAXdBVV95cUxNUFBHUHFfT3FKajlwTXhSeGZDLUpTWm9WcXNWMFhHODZPXzI0bW1ZcFJwYTZlQXJaUDI0dlg2TkxrTDhDUXQzVk1LcmpFaElUOW41OFhrQnE5anVXeWlDV3hET0xQaGR3UWc2TVE4cU5NTUxPVnhFWQ?oc=5" target="_blank" style="color:var(--primary);font-weight:500;font-size:0.95rem">숙명여대 연구팀, 희귀 근육질환 'GNE 근병증' 치료 단서 발견</a>
                 </li>
                 <li style="padding:14px 0">
                   <div style="font-size:0.8rem;color:var(--sub);margin-bottom:4px">2026-04-21 · 🇰🇷 이뉴스투데이</div>
-                  <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE9tTHhfQmVCd1FQUlNSTVR6T0dIOGVCdTVzaG1seDktd2ZjQUJoZXBJZkMyYWFDc01OZHE3WG5oMVJ5ZThjRlU4cDgxRHlFSU5CSFM2STh3YVlVeDNIV09oT0FfQmd6Z0w3UW5aNHVPTkvSAXRBVV95cUxPWTdWa1RzQ2pzdkx3d0Y2cnBuRW84R0VoOGxTX3hFVk5TT21VMU9XQW82LUYxOHpOZ3Fxa1hsaS14UXQ5ajAxV3YxeTlCUldOU3pMdHVXOUFVLXJkTVl3NWJZelNFUmRMOWw4aTJDc2ZaMm1lOQ?oc=5" target="_blank" style="color:var(--text);font-weight:500;font-size:0.95rem">숙명여대 김주미 교수팀, 희귀 근육질환 'GNE 근병증' 치료 단서 찾았다</a>
+                  <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE9tTHhfQmVCd1FQUlNSTVR6T0dIOGVCdTVzaG1seDktd2ZjQUJoZXBJZkMyYWFDc01OZHE3WG5oMVJ5ZThjRlU4cDgxRHlFSU5CSFM2STh3YVlVeDNIV09oT0FfQmd6Z0w3UW5aNHVPTkvSAXRBVV95cUxPWTdWa1RzQ2pzdkx3d0Y2cnBuRW84R0VoOGxTX3hFVk5TT21VMU9XQW82LUYxOHpOZ3Fxa1hsaS14UXQ5ajAxV3YxeTlCUldOU3pMdHVXOUFVLXJkTVl3NWJZelNFUmRMOWw4aTJDc2ZaMm1lOQ?oc=5" target="_blank" style="color:var(--primary);font-weight:500;font-size:0.95rem">숙명여대 김주미 교수팀, 희귀 근육질환 'GNE 근병증' 치료 단서 찾았다</a>
                 </li>
               </ul>
               <div style="margin-top:16px;text-align:right">
-                <a href="latest.html#news-section" style="color:var(--primary);font-weight:600;font-size:0.9rem">전체 뉴스 보기 (19건) →</a>
+                <a href="archive.html" style="color:var(--primary);font-weight:600;font-size:0.9rem">전체 뉴스 보기 (19건) →</a>
               </div>
             </div>
           </div>
@@ -678,53 +711,53 @@
 
         <div class="card" style="margin-bottom:1.5rem">
           <h3 style="font-weight:600">🤖 AI 고관련도 논문 (관련도 ≥8점)</h3>
-          <table>
+          <table class="paper-table">
             <thead><tr><th>날짜</th><th>제목 / AI 요약</th><th>저널</th><th>관련도</th></tr></thead>
             <tbody>
               <tr>
-                <td>2026-04-10</td>
-                <td>Defective autophagy in GNE myopathy is rescued by inhibition of noncanonical Akt
+                <td data-label="날짜">2026-04-10</td>
+                <td data-label="제목"><div class="td-content">Defective autophagy in GNE myopathy is rescued by inhibition of noncanonical Akt
                   <div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">GNE 근육병에서 자가포식(autophagy) 결함의 분자 기전을 규명한 연구입니다. FDA 승인 PI3K 억제제인 copanlisib이 ULK1 활성을 회복시켜 자가포식을 재활성화함을 신경근 오가노이드에서 확인했습니다.</div>
                   <div class="patient-meaning"><div class="patient-meaning-title">💡 환자에게 의미</div><div class="patient-meaning-content">이미 FDA 승인된 약물(copanlisib)을 활용할 수 있어 향후 임상 적용 가능성이 빠를 수 있습니다.</div></div>
-                </td>
-                <td>Experimental & molecular medicine</td>
-                <td><span class="badge badge-score-10">10/10</span></td>
+                </div></td>
+                <td data-label="저널">Experimental & molecular medicine</td>
+                <td data-label="관련도"><span class="badge badge-score-10">10/10</span></td>
               </tr>
               <tr>
-                <td>2026-03-28</td>
-                <td>Alternative Dosing Strategies to Enhance the Absorption of N-Acetyl-D-Mannosamine
+                <td data-label="날짜">2026-03-28</td>
+                <td data-label="제목"><div class="td-content">Alternative Dosing Strategies to Enhance the Absorption of N-Acetyl-D-Mannosamine
                   <div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">ManNAc의 낮은 경구 생체이용률을 개선하기 위한 대체 투여 전략 연구. 분할투여 시 ManNAc 혈장 노출이 1.7배, Neu5Ac 농도는 1.9배 증가했습니다.</div>
                   <div class="patient-meaning"><div class="patient-meaning-title">💡 환자에게 의미</div><div class="patient-meaning-content">복약 편의성과 비용 부담 감소로 이어질 수 있는 중요한 결과입니다.</div></div>
-                </td>
-                <td>Clinical drug investigation</td>
-                <td><span class="badge badge-score-10">10/10</span></td>
+                </div></td>
+                <td data-label="저널">Clinical drug investigation</td>
+                <td data-label="관련도"><span class="badge badge-score-10">10/10</span></td>
               </tr>
               <tr>
-                <td>2026-03-02</td>
-                <td>Preclinical assessment of GNE gene therapy
+                <td data-label="날짜">2026-03-02</td>
+                <td data-label="제목"><div class="td-content">Preclinical assessment of GNE gene therapy
                   <div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">돌연변이를 억제하면서 정상 GNE 유전자를 발현시키는 이중 기능 플라스미드 개발. 마우스 모델에서 근육 전달 및 인간 GNE 발현이 입증되었습니다.</div>
                   <div class="patient-meaning"><div class="patient-meaning-title">💡 환자에게 의미</div><div class="patient-meaning-content">근본적 치료 옵션이 될 수 있는 유전자 치료법의 임상시험 진입 가능성을 시사합니다.</div></div>
-                </td>
-                <td>Future science OA</td>
-                <td><span class="badge badge-score-10">10/10</span></td>
+                </div></td>
+                <td data-label="저널">Future science OA</td>
+                <td data-label="관련도"><span class="badge badge-score-10">10/10</span></td>
               </tr>
               <tr>
-                <td>2026-02-03</td>
-                <td>Subclinical Respiratory Muscle Weakness and Obstructive Sleep Apnea are Common in GNE Myopathy
+                <td data-label="날짜">2026-02-03</td>
+                <td data-label="제목"><div class="td-content">Subclinical Respiratory Muscle Weakness and Obstructive Sleep Apnea are Common in GNE Myopathy
                   <div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">GNE 근육병 환자 9명 대상 연구. MIP 감소 55.6%, OSA 66.7%, 수면의 질 저하 77.8%로 나타났습니다.</div>
                   <div class="patient-meaning"><div class="patient-meaning-title">💡 환자에게 의미</div><div class="patient-meaning-content">정기 검진 시 MIP, 기침유량, 수면다원검사 등 추가 검사가 중요합니다.</div></div>
-                </td>
-                <td>Annals of Indian Academy of Neurology</td>
-                <td><span class="badge badge-score-9">9/10</span></td>
+                </div></td>
+                <td data-label="저널">Annals of Indian Academy of Neurology</td>
+                <td data-label="관련도"><span class="badge badge-score-9">9/10</span></td>
               </tr>
               <tr>
-                <td>2026-01-23</td>
-                <td>Comparison of whole-body muscle imaging findings between GNE myopathy and other myopathies
+                <td data-label="날짜">2026-01-23</td>
+                <td data-label="제목"><div class="td-content">Comparison of whole-body muscle imaging findings between GNE myopathy and other myopathies
                   <div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">전신 MRI로 GNE 근육병과 다른 근병증을 감별한 연구. 광배근(latissimus dorsi) 보존이 새로운 감별 특징으로 제시되었습니다.</div>
                   <div class="patient-meaning"><div class="patient-meaning-title">💡 환자에게 의미</div><div class="patient-meaning-content">더 빠르고 정확한 진단에 도움이 될 수 있습니다.</div></div>
-                </td>
-                <td>PloS one</td>
-                <td><span class="badge badge-score-9">9/10</span></td>
+                </div></td>
+                <td data-label="저널">PloS one</td>
+                <td data-label="관련도"><span class="badge badge-score-9">9/10</span></td>
               </tr>
             </tbody>
           </table>
@@ -732,57 +765,57 @@
 
         <div class="card">
           <h3 style="font-weight:600">📚 최근 2년 주요 논문</h3>
-          <table>
+          <table class="paper-table">
             <thead><tr><th>날짜</th><th>저널</th><th>제목 / AI 요약</th><th>저자</th><th>링크</th></tr></thead>
             <tbody>
               <tr>
-                <td>2026-04-10</td>
-                <td>Exp Mol Med</td>
-                <td><span class="badge badge-score-10">10/10</span> Defective autophagy in GNE myopathy is rescued by inhibition of noncanonical Akt<div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">인간 만능줄기세포 유래 GNE 근아세포와 Gne-knockout C2C12 모델을 활용해 자가포식 결함의 분자 기전을 규명했습니다.</div></td>
-                <td>Kim Dong-Woo et al.</td>
-                <td><a href="https://doi.org/10.1038/s12276-026-01701-7" target="_blank" style="color:var(--primary)">DOI</a></td>
+                <td data-label="날짜">2026-04-10</td>
+                <td data-label="저널">Exp Mol Med</td>
+                <td data-label="제목"><div class="td-content"><span class="badge badge-score-10">10/10</span> Defective autophagy in GNE myopathy is rescued by inhibition of noncanonical Akt<div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">인간 만능줄기세포 유래 GNE 근아세포와 Gne-knockout C2C12 모델을 활용해 자가포식 결함의 분자 기전을 규명했습니다.</div></div></td>
+                <td data-label="저자">Kim Dong-Woo et al.</td>
+                <td data-label="링크"><a href="https://doi.org/10.1038/s12276-026-01701-7" target="_blank" style="color:var(--primary)">DOI</a></td>
               </tr>
               <tr>
-                <td>2026-03-28</td>
-                <td>Clin Drug Investig</td>
-                <td><span class="badge badge-score-10">10/10</span> Alternative Dosing Strategies for ManNAc<div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">건강한 남성 12명 대상 ManNAc 분할투여 전략 비교 연구.</div></td>
-                <td>Meola Tahlia R et al.</td>
-                <td><a href="https://doi.org/10.1007/s40261-026-01546-y" target="_blank" style="color:var(--primary)">DOI</a></td>
+                <td data-label="날짜">2026-03-28</td>
+                <td data-label="저널">Clin Drug Investig</td>
+                <td data-label="제목"><div class="td-content"><span class="badge badge-score-10">10/10</span> Alternative Dosing Strategies for ManNAc<div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">건강한 남성 12명 대상 ManNAc 분할투여 전략 비교 연구.</div></div></td>
+                <td data-label="저자">Meola Tahlia R et al.</td>
+                <td data-label="링크"><a href="https://doi.org/10.1007/s40261-026-01546-y" target="_blank" style="color:var(--primary)">DOI</a></td>
               </tr>
               <tr>
-                <td>2026-03-02</td>
-                <td>Future Sci OA</td>
-                <td><span class="badge badge-score-10">10/10</span> Preclinical assessment of GNE gene therapy<div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">이중 기능 플라스미드를 통한 GNE 유전자 치료 전임상 연구.</div></td>
-                <td>Kerneis Fabienne et al.</td>
-                <td><a href="https://doi.org/10.1080/20565623.2026.2635722" target="_blank" style="color:var(--primary)">DOI</a></td>
+                <td data-label="날짜">2026-03-02</td>
+                <td data-label="저널">Future Sci OA</td>
+                <td data-label="제목"><div class="td-content"><span class="badge badge-score-10">10/10</span> Preclinical assessment of GNE gene therapy<div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">이중 기능 플라스미드를 통한 GNE 유전자 치료 전임상 연구.</div></div></td>
+                <td data-label="저자">Kerneis Fabienne et al.</td>
+                <td data-label="링크"><a href="https://doi.org/10.1080/20565623.2026.2635722" target="_blank" style="color:var(--primary)">DOI</a></td>
               </tr>
               <tr>
-                <td>2026-02-06</td>
-                <td>J Biol Chem</td>
-                <td><span class="badge badge-score-8">8/10</span> Biosynthetic and genetic pathways related to sialic acid metabolism<div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">시알산 대사의 생합성 및 유전 경로 종합 리뷰.</div></td>
-                <td>Huang Sjanie et al.</td>
-                <td><a href="https://doi.org/10.1016/j.jbc.2026.111262" target="_blank" style="color:var(--primary)">DOI</a></td>
+                <td data-label="날짜">2026-02-06</td>
+                <td data-label="저널">J Biol Chem</td>
+                <td data-label="제목"><div class="td-content"><span class="badge badge-score-8">8/10</span> Biosynthetic and genetic pathways related to sialic acid metabolism<div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">시알산 대사의 생합성 및 유전 경로 종합 리뷰.</div></div></td>
+                <td data-label="저자">Huang Sjanie et al.</td>
+                <td data-label="링크"><a href="https://doi.org/10.1016/j.jbc.2026.111262" target="_blank" style="color:var(--primary)">DOI</a></td>
               </tr>
               <tr>
-                <td>2026-02-03</td>
-                <td>Ann Indian Acad Neurol</td>
-                <td><span class="badge badge-score-9">9/10</span> Subclinical Respiratory Muscle Weakness in GNE Myopathy<div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">GNE 근육병 환자 9명 대상 폐기능 및 수면무호흡 연구.</div></td>
-                <td>Kiyan Esen et al.</td>
-                <td><a href="https://doi.org/10.4103/aian.aian_725_25" target="_blank" style="color:var(--primary)">DOI</a></td>
+                <td data-label="날짜">2026-02-03</td>
+                <td data-label="저널">Ann Indian Acad Neurol</td>
+                <td data-label="제목"><div class="td-content"><span class="badge badge-score-9">9/10</span> Subclinical Respiratory Muscle Weakness in GNE Myopathy<div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">GNE 근육병 환자 9명 대상 폐기능 및 수면무호흡 연구.</div></div></td>
+                <td data-label="저자">Kiyan Esen et al.</td>
+                <td data-label="링크"><a href="https://doi.org/10.4103/aian.aian_725_25" target="_blank" style="color:var(--primary)">DOI</a></td>
               </tr>
               <tr>
-                <td>2026-02-01</td>
-                <td>Hematology</td>
-                <td><span class="badge badge-score-9">9/10</span> GNE-related thrombocytopenia in a 3-month-old<div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">영아기 혈소판감소증으로 발현된 GNE 유전자 변이 증례 보고.</div></td>
-                <td>Alshaikhi Omar et al.</td>
-                <td><a href="https://doi.org/10.1080/16078454.2026.2620148" target="_blank" style="color:var(--primary)">DOI</a></td>
+                <td data-label="날짜">2026-02-01</td>
+                <td data-label="저널">Hematology</td>
+                <td data-label="제목"><div class="td-content"><span class="badge badge-score-9">9/10</span> GNE-related thrombocytopenia in a 3-month-old<div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">영아기 혈소판감소증으로 발현된 GNE 유전자 변이 증례 보고.</div></div></td>
+                <td data-label="저자">Alshaikhi Omar et al.</td>
+                <td data-label="링크"><a href="https://doi.org/10.1080/16078454.2026.2620148" target="_blank" style="color:var(--primary)">DOI</a></td>
               </tr>
               <tr>
-                <td>2026-01-23</td>
-                <td>PloS one</td>
-                <td><span class="badge badge-score-9">9/10</span> Whole-body muscle MRI in GNE myopathy<div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">전신 MRI를 활용한 GNE 근육병 감별 진단 연구.</div></td>
-                <td>Boonsri Pattira et al.</td>
-                <td><a href="https://doi.org/10.1371/journal.pone.0341031" target="_blank" style="color:var(--primary)">DOI</a></td>
+                <td data-label="날짜">2026-01-23</td>
+                <td data-label="저널">PloS one</td>
+                <td data-label="제목"><div class="td-content"><span class="badge badge-score-9">9/10</span> Whole-body muscle MRI in GNE myopathy<div style="font-size:.8rem;color:#64748b;margin-top:.25rem;line-height:1.5">전신 MRI를 활용한 GNE 근육병 감별 진단 연구.</div></div></td>
+                <td data-label="저자">Boonsri Pattira et al.</td>
+                <td data-label="링크"><a href="https://doi.org/10.1371/journal.pone.0341031" target="_blank" style="color:var(--primary)">DOI</a></td>
               </tr>
             </tbody>
           </table>
@@ -849,7 +882,7 @@
           </div>
 
           <div style="text-align:right">
-            <a href="latest.html#clinical-section" style="color:var(--primary);font-weight:600;font-size:0.9rem">전체 임상시험 상세 보기 →</a>
+            <a href="#clinical-section" onclick="openHomeSection('clinical-section'); return false;" style="color:var(--primary);font-weight:600;font-size:0.9rem">전체 임상시험 상세 보기 →</a>
           </div>
 
         </div><!-- /.home-collapsible-body -->
