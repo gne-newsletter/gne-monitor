@@ -6,6 +6,19 @@
 
 ## ✅ 완료 (최근 → 과거)
 
+### 2026-05-18 — latest.html GitHub 배포 + 공유 방법 확인
+- [x] **latest.html 최신 버전 GitHub push** (뉴스레터 포맷 완성본)
+- [x] **GitHub Pages 공유 링크 확인**: `https://gne-newsletter.github.io/gne-monitor/latest.html`
+  - 모바일 포함 어디서든 접근 가능 (카카오톡/문자/이메일/블로그 링크 공유)
+  - 환우회 초안 공유 준비 완료
+- [x] **뉴스레터 발송 방식 정리**
+  - 카카오톡/문자: GitHub Pages 링크 공유 (HTML 직접 전송 불가)
+  - 이메일 HTML 직접 발송: 별도 이메일 전용 HTML 제작 필요 (약 2~3시간, 나중에 작업)
+  - OG 태그 추가 시 카카오톡 링크 미리보기 카드 개선 가능 (약 30분, 나중에 작업)
+- [x] **Claude Code 자동화 설정 완료**
+  - SQLite MCP (`mcp-sqlite`) 설치 → 대화 중 DB 조회 가능
+  - `.env` 파일 편집 차단 훅 추가
+
 ### 2026-05-18 — index.html UI 개선 (로고 교체 + 색감 + 반응형 테이블)
 - [x] **네비게이션 로고 교체**: `가로로고.jpeg` → `KGNEM가로로고.png` (누끼 작업, 402×103px)
 - [x] **히어로 반투명 배경 이미지 교체**: `스크린샷.png` → `KGNEM심볼.png` (트리밍)
