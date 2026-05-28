@@ -167,7 +167,7 @@ gne-monitor/
 
 #### 📖 ZONE 2 — 2분 핵심 (quick-scan)
 - **Quick Scan 카드**: 다음 2건 핵심 논문 (관련도 점수 + 요약)
-- **행동 가이드**: 모집 중/예정 임상시험 바로가기 링크 (파란 그라디언트)
+- ~~행동 가이드~~ **삭제됨** (2026-05-10: 한국 환자에게 무관한 정보)
 
 #### 🔬 ZONE 3 — 10분 심층 (collapsible, 기본 접힘)
 - 📰 최근 30일 뉴스 전체
@@ -402,6 +402,28 @@ echo $ANTHROPIC_API_KEY
   - 트리거: "작업 저장해줘" / "오늘 여기까지"
   - Claude memory에 저장 → 세션 간 지속
   - CLAUDE.md(전략) / STATUS.md(현황) 자동 업데이트
+
+### 2026-05-10 (행동 가이드 제거 + Layer 2/3 시도 및 롤백)
+
+- **행동 가이드 섹션 완전 제거** (`analysis/pipeline.py`)
+  - 이유: 한국 GNE 환자 기준으로 무관한 정보 (해외 임상시험 바로가기)
+  - ZONE 2 → Quick Scan 다음 바로 ZONE 3으로 연결
+
+- **DB 스키마 확장** (향후 Layer 2/3 활용 가능)
+  - `pubmed_articles`: layer, gne_distance, outcome_type, positive_aspect, limitation, realistic_impact, gne_perspective 컬럼 추가
+  - `news_articles`: layer, gne_distance 컬럼 추가
+  - Layer 1 = GNE 직접 관련, Layer 2 = 근육병 치료 기술, Layer 3 = 바이오 생태계
+
+- **Layer 2/3 구조 시도 → 롤백** (교훈 저장)
+  - 시도: `유전자뉴스/` 폴더의 설계 파일 적용 (Layer 2 거리 테이블, 현실 체크 섹션 등)
+  - 롤백 이유: 구조가 복잡하고, Layer 1 통계와 분리 원칙 구현에 혼선
+  - **향후 접근 방향**:
+    - Layer 1 통계와 완전 분리 (`AND (layer = 1 OR layer IS NULL)` 조건 모든 쿼리에 적용 필수)
+    - 복잡한 DB 쿼리 없이 수집된 뉴스 목록을 단순 카드로 표시
+    - collapsible로 추가, 기본은 접힌 상태
+    - 경고 배너 "GNE 직접 관련이 아닙니다" 명시
+
+- **API 키**: `.env` 파일에서 관리 (`sk-ant-api03-...` 형식 확인)
 
 ### 2026-05-09 (Obsidian Vault 워크플로우 구축)
 
