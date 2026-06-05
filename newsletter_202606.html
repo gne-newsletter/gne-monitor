@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GNE 근육병 뉴스레터 — 2026년 6월 창간호</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #8b5cf6;
+      --primary-dark: #7c3aed;
+      --secondary: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+      --policy: #0ea5e9;
+      --bg-light: #f8fafc;
+      --bg-card: #ffffff;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+      --border: #e2e8f0;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.09);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Header ── */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white; padding: 2.25rem 1rem; text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+    .header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .header .meta { font-size: 0.9rem; opacity: 0.85; margin-bottom: 0.5rem; }
+    .header .issue-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.22);
+      padding: 0.25rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      margin-right: 0.4rem;
+    }
+    .header .launch-badge {
+      display: inline-block;
+      background: rgba(251,191,36,0.85);
+      color: #1e293b;
+      padding: 0.25rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .header-nav {
+      margin-top: 1rem;
+      font-size: 0.84rem;
+      opacity: 0.85;
+    }
+    .header-nav a { color: white; margin: 0 0.7rem; }
+    .header-nav a:hover { opacity: 0.7; text-decoration: none; }
+
+    /* ── Container ── */
+    .container { max-width: 780px; margin: 0 auto; padding: 1.75rem 1.25rem; }
+
+    /* ── 환우회 소식 ── */
+    .community-news {
+      background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+      border-radius: 16px; padding: 1.75rem;
+      border-left: 5px solid var(--primary);
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 2.25rem;
+    }
+    .community-news-badge {
+      display: inline-block; background: var(--primary); color: white;
+      padding: 0.35rem 0.85rem; border-radius: 9999px;
+      font-weight: 600; font-size: 0.82rem; margin-bottom: 0.9rem;
+    }
+    .community-news-body {
+      font-size: 0.95rem; color: var(--text-secondary); line-height: 1.75;
+    }
+    .community-news-body p + p { margin-top: 0.75rem; }
+
+    /* ── Section ── */
+    .section { margin-bottom: 2.5rem; }
+    .section-header {
+      display: flex; align-items: center; gap: 0.6rem;
+      margin-bottom: 1.25rem; padding-bottom: 0.6rem;
+      border-bottom: 2.5px solid var(--border);
+    }
+    .section-icon { font-size: 1.3rem; }
+    .section-title { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
+    .section-count {
+      margin-left: auto; font-size: 0.78rem;
+      background: var(--bg-light); color: var(--text-muted);
+      padding: 0.2rem 0.55rem; border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    /* ── Article Card ── */
+    .article-card {
+      background: var(--bg-card); border-radius: 14px;
+      padding: 1.6rem; box-shadow: var(--shadow);
+      margin-bottom: 1.25rem;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.18s;
+    }
+    .article-card:hover { box-shadow: var(--shadow-lg); }
+
+    .card-meta {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 0.9rem; flex-wrap: wrap;
+    }
+    .card-source-badge {
+      display: inline-block;
+      padding: 0.22rem 0.65rem; border-radius: 6px;
+      font-size: 0.75rem; font-weight: 600; color: white;
+    }
+    .badge-news { background: #0ea5e9; }
+    .badge-paper { background: #8b5cf6; }
+    .badge-policy { background: #64748b; }
+    .card-date { font-size: 0.8rem; color: var(--text-muted); }
+
+    .card-title-ko {
+      font-size: 1.08rem; font-weight: 700; color: var(--text-primary);
+      line-height: 1.45; margin-bottom: 0.35rem;
+    }
+    .card-title-en {
+      font-size: 0.78rem; color: var(--text-muted);
+      margin-bottom: 1rem; line-height: 1.4;
+      font-style: italic;
+    }
+
+    .card-divider {
+      border: none; border-top: 1px solid var(--border);
+      margin: 1rem 0;
+    }
+
+    .card-summary {
+      font-size: 0.92rem; color: var(--text-secondary); line-height: 1.75;
+    }
+
+    /* ── 환자에게 의미 ── */
+    .patient-meaning {
+      background: #f0fdf4;
+      border-left: 4px solid var(--secondary);
+      padding: 1.1rem 1.2rem;
+      border-radius: 0 10px 10px 0;
+      margin-top: 1rem;
+    }
+    .patient-meaning-title {
+      font-weight: 700; color: #065f46;
+      margin-bottom: 0.6rem; font-size: 0.9rem;
+    }
+    .patient-meaning-content {
+      color: #064e3b; font-size: 0.88rem; line-height: 1.75;
+    }
+    .patient-meaning-content p + p { margin-top: 0.6rem; }
+
+    /* ── 원문 링크 ── */
+    .card-link-row {
+      display: flex; justify-content: flex-end;
+      margin-top: 1.1rem;
+    }
+    .card-link {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--primary);
+      padding: 0.4rem 0.9rem;
+      border: 1.5px solid #c4b5fd;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+    .card-link:hover {
+      background: #ede9fe; text-decoration: none;
+    }
+
+    /* ── 정책 동향 특별 스타일 ── */
+    .policy-intro {
+      background: #f0f9ff;
+      border-left: 4px solid var(--policy);
+      padding: 1rem 1.2rem;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 1.25rem;
+      font-size: 0.92rem; color: #0c4a6e; line-height: 1.7;
+    }
+
+    .policy-table {
+      width: 100%; border-collapse: collapse;
+      margin: 1rem 0; font-size: 0.86rem;
+    }
+    .policy-table th {
+      background: #f1f5f9; text-align: left;
+      padding: 0.55rem 0.8rem; font-weight: 600;
+      border-bottom: 2px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .policy-table td {
+      padding: 0.55rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .policy-table tr:last-child td { border-bottom: none; }
+    .check-yes { color: #10b981; font-weight: 700; }
+
+    .policy-highlight {
+      background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%);
+      border-radius: 10px; padding: 1rem 1.2rem;
+      margin-top: 1rem;
+      font-size: 0.88rem; color: #713f12; line-height: 1.7;
+      border-left: 4px solid #f59e0b;
+    }
+    .policy-highlight strong { color: #92400e; }
+
+    /* ── 홈 링크 ── */
+    .more-section {
+      background: var(--bg-card); border-radius: 12px;
+      padding: 1.4rem; box-shadow: var(--shadow);
+      margin-bottom: 2rem; border-top: 3px solid var(--primary);
+    }
+    .more-section-title {
+      font-size: 0.95rem; font-weight: 700; color: var(--text-primary);
+      margin-bottom: 0.9rem;
+    }
+    .more-links { display: flex; flex-direction: column; gap: 0.5rem; }
+    .more-link-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.65rem 1rem;
+      background: var(--bg-light); border-radius: 8px;
+      font-size: 0.88rem; color: var(--text-primary);
+      border: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .more-link-item:hover { background: #ede9fe; border-color: #c4b5fd; text-decoration: none; }
+    .more-link-arrow { color: var(--primary); font-weight: 700; }
+
+    /* ── Feedback ── */
+    .feedback-section {
+      background: var(--bg-card); border-radius: 12px;
+      padding: 1.4rem; text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .feedback-title { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0.9rem; }
+    .feedback-suggest-btn {
+      display: inline-block;
+      background: var(--primary); color: white;
+      padding: 0.7rem 1.9rem; border-radius: 10px;
+      font-size: 0.95rem; font-weight: 600;
+      transition: background 0.18s, transform 0.18s;
+    }
+    .feedback-suggest-btn:hover {
+      background: var(--primary-dark); transform: translateY(-2px); text-decoration: none;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--bg-card); border-top: 1px solid var(--border);
+      padding: 2rem 1rem; text-align: center;
+      margin-top: 2.5rem; color: var(--text-secondary); font-size: 0.88rem;
+    }
+    .footer a { color: var(--primary); margin: 0 0.5rem; }
+    .footer .sources {
+      font-size: 0.78rem; color: var(--text-muted);
+      margin-top: 0.75rem; line-height: 1.8;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 640px) {
+      .header h1 { font-size: 1.35rem; }
+      .container { padding: 1.1rem; }
+      .article-card { padding: 1.25rem; }
+      .card-title-ko { font-size: 1rem; }
+      .policy-table { font-size: 0.82rem; }
+      .policy-table th, .policy-table td { padding: 0.45rem 0.55rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📬 GNE 근육병 뉴스레터</h1>
+  <div class="meta">한국 GNE 근육병 환우회 · 연구·임상·환우 소식 월간 요약</div>
+  <div style="margin-top:0.6rem">
+    <span class="issue-badge">2026년 6월호</span>
+    <span class="launch-badge">🎉 창간호</span>
+  </div>
+  <div class="header-nav">
+    <a href="index.html">홈</a>
+    <a href="about.html">GNE 근육병이란?</a>
+    <a href="community.html">환우회 소개</a>
+    <a href="archive.html">지난 뉴스레터</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ══ 환우회 소식 ══ -->
+  <div class="community-news">
+    <div class="community-news-badge">🏠 환우회 소식</div>
+    <div class="community-news-body">
+      <p>
+        <strong>📬 뉴스레터 창간</strong> — 한국 GNE 근육병 환우회가 이번 호부터 월간 뉴스레터를 발행합니다.
+        GNE 근육병은 전 세계 환자 수가 극히 적어 정보를 얻기가 쉽지 않습니다.
+        이 뉴스레터는 연구자들이 발표하는 논문, 기업들이 진행 중인 임상시험,
+        환우에게 영향을 미치는 정책 변화를 매월 한 자리에 모아 쉬운 말로 전달합니다.
+      </p>
+      <p>
+        <strong>📅 발행 주기</strong> — 매월 첫째 주 발행 예정입니다.
+        피드백과 제안은 언제든 환영합니다.
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ 섹션 1: GNE 직접 소식 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🔬</span>
+      <span class="section-title">GNE 직접 소식</span>
+      <span class="section-count">2건</span>
+    </div>
+
+    <!-- 카드 1: 숙명여대 Copanlisib -->
+    <div class="article-card">
+      <div class="card-meta">
+        <span class="card-source-badge badge-news">뉴스 · 논문</span>
+        <span class="card-date">2026년 4월 · Experimental &amp; Molecular Medicine (Nature 포트폴리오)</span>
+      </div>
+      <div class="card-title-ko">숙명여대 연구팀, GNE 근병증 발병 기전 규명 — 기존 승인 약물 코판리시브를 치료 후보로 제시</div>
+      <div class="card-title-en">(Defective autophagy in GNE myopathy is rescued by inhibition of noncanonical Akt–mTORC1 activation across multiple isogenic models)</div>
+
+      <hr class="card-divider">
+
+      <div class="card-summary">
+        GNE 근육병 환자의 근육 세포에서는 손상된 단백질을 제때 청소하는 '자가포식(autophagy)' 기능이 망가져 있는데, 이번 연구는 그 원인을 처음으로 분자 수준에서 밝혔습니다. 인간 줄기세포로 만든 GNE 근육 세포 모델과 GNE 유전자가 제거된 세포 모델을 동시에 활용해, 세포 주변의 과도한 기질 생성이 AKT-mTORC1 경로를 비정상적으로 켜서 자가포식 전체를 차단한다는 것을 확인했습니다. 1,000여 종의 약물 후보 스크리닝을 통해 이미 FDA 승인을 받은 PI3K 억제제 코판리시브(copanlisib)가 자가포식을 재개시킨다는 사실을 신경근육 오가노이드 모델에서 입증했습니다.
+      </div>
+
+      <div class="patient-meaning">
+        <div class="patient-meaning-title">💡 환자에게 의미</div>
+        <div class="patient-meaning-content">
+          <p>이 연구는 두 가지 이유에서 특히 중요합니다.</p>
+          <p>첫째, 왜 GNE 근육병에서 근육이 서서히 손상되는지에 대한 핵심 답 중 하나를 찾았습니다. 지금까지는 시알산 부족이 가장 잘 알려진 원인이었는데, 이번 연구는 그와 별개로 '세포 청소 시스템의 고장'이 또 다른 축을 이루고 있음을 보여줍니다. 시알산 보충 치료 외에 추가적인 치료 전략이 필요하다는 과학적 근거가 됩니다.</p>
+          <p>둘째, 제안된 치료 후보 코판리시브는 신약이 아니라 혈액암(혈관육종)에 이미 사용되고 있는 승인 약물입니다. 완전히 새로운 약을 처음부터 개발하는 것보다 안전성 데이터가 풍부하고, 임상시험 진입까지의 시간을 크게 단축할 수 있습니다. 한국 연구팀이 국제 저명 저널에 발표한 연구라는 점에서 국내 임상시험으로 이어질 가능성도 주목됩니다.</p>
+        </div>
+      </div>
+
+      <div class="card-link-row">
+        <a href="https://pubmed.ncbi.nlm.nih.gov/41963465/" target="_blank" class="card-link">원문 보기 →</a>
+      </div>
+    </div>
+
+    <!-- 카드 2: UX016 IND -->
+    <div class="article-card">
+      <div class="card-meta">
+        <span class="card-source-badge badge-news">임상 소식</span>
+        <span class="card-date">2026년 3월 30일 · Ultragenyx Pharmaceutical</span>
+      </div>
+      <div class="card-title-ko">Ultragenyx, GNE 근육병 신약 UX016 미국 임상 진입 허가 획득 — 2026년 하반기 1/2상 시작 예정</div>
+      <div class="card-title-en">(Ultragenyx Announces FDA Clearance of IND for UX016, a Sialic Acid Prodrug for GNE Myopathy)</div>
+
+      <hr class="card-divider">
+
+      <div class="card-summary">
+        미국 희귀질환 전문 제약사 Ultragenyx가 GNE 근육병 치료제 후보 UX016에 대한 FDA 임상시험 신청(IND)을 승인받았습니다. UX016은 <strong>시알산 전구약물(sialic acid prodrug)</strong>로, 기존 시알산 보충 방식보다 흡수율과 안정성을 높이도록 설계된 새로운 기질 보충 치료제입니다. 계획된 1/2상 임상시험은 18~55세 성인 약 24명을 대상으로 2026년 하반기 미국에서 시작되며, 이 임상시험 비용은 GNE 환자 단체가 자금을 직접 지원하는 방식으로 운영됩니다.
+      </div>
+
+      <div class="patient-meaning">
+        <div class="patient-meaning-title">💡 환자에게 의미</div>
+        <div class="patient-meaning-content">
+          <p>GNE 근육병을 위해 설계된 약물이 사람 몸에 처음 투여되는 임상시험이 시작된다는 것은 이 분야에서 매우 드문 일입니다. 안전성과 흡수율을 개선한 새로운 형태의 시알산 보충제가 FDA 관문을 통과했다는 것은 개발 신뢰도가 상당한 수준에 올랐다는 의미입니다.</p>
+          <p>주목할 점은 환자 단체가 임상시험에 직접 자금을 대는 구조입니다. 제약사가 경제성이 없다고 판단해 외면할 수 있는 초희귀질환에서 임상시험을 현실화하는 중요한 모델로, 한국 환우회도 참고할 수 있는 사례입니다.</p>
+          <p>2026년 하반기 결과에 따라 국제 임상 확대 여부가 결정되며, 한국 환자의 임상 참여 가능성도 열릴 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="card-link-row">
+        <a href="https://ir.ultragenyx.com/news-releases/news-release-details/ultragenyx-announces-fda-clearance-investigational-new-drug-1" target="_blank" class="card-link">공식 발표 보기 →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 섹션 2: 유전자치료 방향성 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🧬</span>
+      <span class="section-title">유전자치료 방향성</span>
+      <span class="section-count">논문 2건</span>
+    </div>
+
+    <!-- 카드 3: dbDNA in vivo -->
+    <div class="article-card">
+      <div class="card-meta">
+        <span class="card-source-badge badge-paper">논문</span>
+        <span class="card-date">2026년 5월 · The Journal of Gene Medicine</span>
+      </div>
+      <div class="card-title-ko">GNE 유전자치료제, 동물실험에서 안전성·효능 확인 — 임상 1상 진입 근거 마련</div>
+      <div class="card-title-en">(In Vivo Assessment of dbDNA GNE — The Journal of Gene Medicine)</div>
+
+      <hr class="card-divider">
+
+      <div class="card-summary">
+        GNE 근육병에서 가장 흔하게 나타나는 유전자 변이(M743T)를 표적으로 하는 유전자치료제의 생체 내 효능을 동물 모델에서 평가한 연구입니다. 이 치료제는 이중 기능 플라스미드(dbDNA) 방식으로, 변이된 GNE 유전자를 억제하는 동시에 정상 GNE 유전자를 새롭게 공급합니다. 마우스와 랫드에 정맥 투여한 결과 골격근 내 DNA 전달과 시알산 단백질 발현 증가가 확인되었고, 안전성 문제는 발견되지 않았습니다. 이 결과는 사람 대상 1상 임상시험 IND 신청의 과학적 근거로 직접 활용됩니다.
+      </div>
+
+      <div class="patient-meaning">
+        <div class="patient-meaning-title">💡 환자에게 의미</div>
+        <div class="patient-meaning-content">
+          <p>유전자치료제 개발 단계는 세포 실험 → 동물 실험 → 사람 임상시험 순서로 진행됩니다. 이 연구는 동물 실험 단계에서 핵심 목표인 '변이 유전자 억제 + 정상 유전자 공급 + 안전성 확인'을 모두 통과했다는 것을 의미합니다.</p>
+          <p>이 치료법이 특히 중요한 이유는 M743T 변이가 GNE 근육병 환자 중 가장 많이 발견되는 변이 중 하나라는 점입니다. 한국 환자들도 이 변이를 가진 분들이 있으며, 임상시험이 시작될 경우 참여 대상이 될 수 있습니다.</p>
+          <p>아래 전임상 연구(PMID 41770218)와 합쳐 보면, 같은 연구팀이 세포 수준 검증에서 동물 체내 검증까지 체계적으로 단계를 밟아온 것을 확인할 수 있습니다. 누적된 전임상 근거가 있어야 FDA가 사람 대상 임상시험을 허가하기 때문에, 이 연구 시리즈는 실제 임상 진입에 매우 근접한 상태입니다.</p>
+        </div>
+      </div>
+
+      <div class="card-link-row">
+        <a href="https://pubmed.ncbi.nlm.nih.gov/42186366/" target="_blank" class="card-link">원문 보기 →</a>
+      </div>
+    </div>
+
+    <!-- 카드 4: Preclinical -->
+    <div class="article-card">
+      <div class="card-meta">
+        <span class="card-source-badge badge-paper">논문</span>
+        <span class="card-date">2026년 3월 · Future Science OA</span>
+      </div>
+      <div class="card-title-ko">유전자치료제 설계 검증 — 이중기능 플라스미드 시험관·동물 전임상 확인</div>
+      <div class="card-title-en">(Preclinical assessment of GNE — Future Science OA)</div>
+
+      <hr class="card-divider">
+
+      <div class="card-summary">
+        위 in vivo 연구와 같은 연구팀의 전임상 기반 연구입니다. 시험관 내 실험에서 이중 기능 플라스미드가 용량 비례적으로 변이 유전자를 억제하고, 정상 GNE 유전자를 발현시키며, 시알산 생성을 증가시킴을 확인했습니다. 마우스 정맥 주사 모델에서도 지질복합체를 통해 근육 세포까지 전달되고 인간 GNE가 발현됨을 입증했습니다.
+      </div>
+
+      <div class="patient-meaning">
+        <div class="patient-meaning-title">💡 환자에게 의미</div>
+        <div class="patient-meaning-content">
+          <p>이 연구는 바로 위 논문의 '설계 검증' 단계에 해당합니다. 두 논문을 시리즈로 보면, 같은 연구팀이 ① 세포 수준에서 작동 원리를 확인하고 ② 살아있는 동물에서 전달과 발현을 검증한 뒤 ③ 임상 IND 신청으로 나아가는 체계적인 경로를 밟고 있습니다.</p>
+          <p>유전자치료 분야에서 GNE 근육병을 표적으로 하는 전임상 논문 2편이 같은 해에 발표된 것은 이례적입니다. 연구팀이 임상 진입에 강한 확신을 갖고 있다는 신호로 해석할 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="card-link-row">
+        <a href="https://pubmed.ncbi.nlm.nih.gov/41770218/" target="_blank" class="card-link">원문 보기 →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 섹션 3: 정책 동향 ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🏛️</span>
+      <span class="section-title">정책 동향</span>
+      <span class="section-count">FDA 규제 변화</span>
+    </div>
+
+    <div class="policy-intro">
+      GNE 근육병처럼 환자 수가 극히 적은 질환에서 임상시험을 진행하기가 지금보다 훨씬 쉬워지는 규제 변화가 2025~2026년에 걸쳐 이루어지고 있습니다.
+    </div>
+
+    <div class="article-card">
+      <div class="card-meta">
+        <span class="card-source-badge badge-policy">정책</span>
+        <span class="card-date">2026년 2월 23일 · HHS / FDA 공식 발표</span>
+      </div>
+      <div class="card-title-ko">FDA, 초희귀질환 임상시험 기준 완화 — GNE 근육병 5가지 요건 모두 해당</div>
+      <div class="card-title-en">(FDA Plausible Mechanism Framework for Individualized Therapies — HHS.gov, 2026.02.23)</div>
+
+      <hr class="card-divider">
+
+      <div class="card-summary">
+        기존에는 신약 승인을 위해 대규모 무작위대조시험(RCT) 2건이 원칙이었습니다. FDA는 이번 초안 가이던스를 통해 초희귀질환 개인화 치료제에 한해 <strong>단 1건의 임상시험만으로 승인을 검토</strong>하고, <strong>자연경과 데이터를 대조군으로 사용</strong>하며, <strong>1상 시험이 곧 허가 임상으로 인정</strong>될 수 있도록 허용했습니다.
+      </div>
+
+      <table class="policy-table">
+        <tr>
+          <th>프레임워크 요건</th>
+          <th>GNE 근육병 해당 여부</th>
+        </tr>
+        <tr>
+          <td>명확한 유전적 원인 확인</td>
+          <td><span class="check-yes">✅</span> GNE 유전자 변이</td>
+        </tr>
+        <tr>
+          <td>치료가 병리 기전 직접 표적</td>
+          <td><span class="check-yes">✅</span> 시알산 경로, 자가포식 경로</td>
+        </tr>
+        <tr>
+          <td>자연경과 데이터 존재</td>
+          <td><span class="check-yes">✅</span> 국내외 자연사 연구 다수</td>
+        </tr>
+        <tr>
+          <td>치료 표적 도달 확인 가능</td>
+          <td><span class="check-yes">✅</span> 시알산 수치 등 바이오마커</td>
+        </tr>
+        <tr>
+          <td>임상 결과 개선 확인 가능</td>
+          <td><span class="check-yes">✅</span> 근력, 보행 기능 지표</td>
+        </tr>
+      </table>
+
+      <div class="patient-meaning">
+        <div class="patient-meaning-title">💡 환자에게 의미</div>
+        <div class="patient-meaning-content">
+          <p>이 정책 변화의 핵심 메시지는 하나입니다: <strong>"환자가 수백 명밖에 없어도 임상시험을 진행하고 약을 승인받을 수 있다."</strong></p>
+          <p>기존에는 수천~수만 명이 필요한 임상시험 설계가 표준이었습니다. GNE 근육병처럼 전 세계 수백~수천 명 규모인 질환은 제약사 입장에서 투자 대비 효과가 낮아 개발이 외면되기 쉬웠습니다. 이번 프레임워크는 그 구조를 바꾸는 것입니다.</p>
+          <p>한국 환우회가 준비 중인 환자 데이터 수집 플랫폼은 바로 이 맥락에서 의미가 있습니다. 자연경과 데이터와 환자 기능 데이터가 쌓이면, 이 프레임워크에서 요구하는 '자연경과 대조군' 자료로 직접 활용될 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="card-link-row">
+        <a href="https://www.hhs.gov/press-room/fda-launches-framework-accelerating-development-individualized-therapies-ultra-rare-diseases.html" target="_blank" class="card-link">HHS 공식 발표 보기 →</a>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="card-meta">
+        <span class="card-source-badge badge-policy">정책</span>
+        <span class="card-date">운영 중 · FDA CDER/CBER</span>
+      </div>
+      <div class="card-title-ko">FDA 희귀질환 평가지표 선도 프로그램 — 소규모 집단 임상 설계 지원</div>
+      <div class="card-title-en">(FDA Rare Disease Endpoint Advancement — RDEA Pilot Program)</div>
+
+      <hr class="card-divider">
+
+      <div class="card-summary">
+        FDA가 운영 중인 RDEA 파일럿 프로그램은 희귀질환 임상시험에 쓸 새로운 평가지표(endpoint)를 FDA와 공동으로 개발할 수 있도록 지원합니다. 2025년 9월 3일 워크샵에서는 "소규모·감소 집단 희귀질환 임상시험의 대조군 설계"가 주요 주제로 다루어졌으며, 제안서는 분기별(3월·6월·9월·12월 31일)로 제출할 수 있습니다.
+      </div>
+
+      <div class="patient-meaning">
+        <div class="patient-meaning-title">💡 환자에게 의미</div>
+        <div class="patient-meaning-content">
+          <p>GNE 근육병처럼 환자가 적어 기존 임상 평가 기준이 맞지 않는 질환이 적극 활용할 수 있는 제도입니다. 제약사나 연구팀이 FDA와 사전에 협력해 평가 기준을 함께 설계할 수 있어, 임상시험의 성공 가능성을 높입니다.</p>
+          <p>위 Plausible Mechanism Framework와 결합하면, 환자 수가 적다는 이유만으로 임상시험이 불가능했던 시대가 점차 바뀌고 있다는 신호입니다.</p>
+        </div>
+      </div>
+
+      <div class="card-link-row">
+        <a href="https://www.fda.gov/drugs/development-resources/rare-disease-endpoint-advancement-pilot-program" target="_blank" class="card-link">FDA 페이지 보기 →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 더 자세한 내용은 홈에서 ══ -->
+  <div class="more-section">
+    <div class="more-section-title">📖 더 자세한 내용은 홈에서 확인하세요</div>
+    <div class="more-links">
+      <a href="index.html#news-section" class="more-link-item">
+        <span>📰 뉴스 전체 보기</span>
+        <span class="more-link-arrow">→</span>
+      </a>
+      <a href="index.html#data-section" class="more-link-item">
+        <span>📊 논문 목록 및 연구 데이터</span>
+        <span class="more-link-arrow">→</span>
+      </a>
+      <a href="index.html#clinical-section" class="more-link-item">
+        <span>🧪 활성 임상시험 현황</span>
+        <span class="more-link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── 제안 ── -->
+  <div class="feedback-section">
+    <div class="feedback-title">뉴스레터에 싣고 싶은 내용이나 제안이 있으신가요?</div>
+    <a href="#" class="feedback-suggest-btn">💡 제안하기</a>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>한국 GNE 근육병 환우회 뉴스레터 · 2026년 6월 창간호</p>
+  <p style="margin-top:0.5rem">
+    <a href="index.html">홈</a>
+    <a href="about.html">GNE 근육병이란?</a>
+    <a href="community.html">환우회 소개</a>
+    <a href="archive.html">지난 뉴스레터</a>
+  </p>
+  <p class="sources">
+    데이터 출처: PubMed · ClinicalTrials.gov · Ultragenyx IR · HHS.gov · FDA.gov
+  </p>
+</div>
+
+</body>
+</html>
