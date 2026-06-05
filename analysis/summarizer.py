@@ -48,7 +48,14 @@ class ArticleSummarizer:
         self._db_path = Path(cfg["database"]["path"])
         self._conn = self._init_db()
 
-        api_key = os.environ.get("ANTHROPIC_API_KEY") or cfg.get("anthropic", {}).get("api_key", "")
+        # Claude Code sets its own session key in ANTHROPIC_API_KEY — load from .env to override
+        try:
+            from dotenv import dotenv_values
+            env_file = Path(config_path).parent / ".env"
+            env_vals = dotenv_values(env_file)
+            api_key = env_vals.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_API_KEY") or cfg.get("anthropic", {}).get("api_key", "")
+        except ImportError:
+            api_key = os.environ.get("ANTHROPIC_API_KEY") or cfg.get("anthropic", {}).get("api_key", "")
         self._client = anthropic.Anthropic(api_key=api_key)
         self._model = "claude-opus-4-7"
 
