@@ -1,0 +1,452 @@
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Layer 2/3 섹션 CSS 스타일
+   pipeline.py의 <style> 태그 내부에 추가
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* ══ Layer 2 섹션 스타일 ══ */
+.layer2-section {
+  background: linear-gradient(to bottom, 
+    rgba(139, 92, 246, 0.02) 0%, 
+    rgba(139, 92, 246, 0.05) 100%);
+  border: 2px solid rgba(139, 92, 246, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.section-badge.warning {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: white;
+  font-weight: 600;
+}
+
+/* ── 경고 배너 ── */
+.warning-banner {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-left: 4px solid #f59e0b;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #78350f;
+  font-weight: 500;
+}
+
+/* ── 신호 섹션 ── */
+.tech-signals {
+  margin-bottom: 1.5rem;
+}
+
+.signal-header {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.signal-header.positive { 
+  color: #10b981; 
+}
+
+.signal-header.negative { 
+  color: #f59e0b; 
+}
+
+/* ── 기술 카드 ── */
+.tech-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
+}
+
+.tech-card:hover {
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+  transform: translateY(-2px);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.tech-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.tech-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tech-row {
+  display: flex;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  align-items: flex-start;
+}
+
+.tech-row .label {
+  flex-shrink: 0;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  margin-right: 0.75rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.label.green { 
+  background: #d1fae5; 
+  color: #065f46; 
+}
+
+.label.orange { 
+  background: #fed7aa; 
+  color: #92400e; 
+}
+
+.label.gray { 
+  background: #e5e7eb; 
+  color: #374151; 
+}
+
+/* ── 거리 배지 ── */
+.distance-badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.distance-badge.high { 
+  background: #10b981; 
+  color: white; 
+}
+
+.distance-badge.near { 
+  background: #f59e0b; 
+  color: white; 
+}
+
+.distance-badge.long { 
+  background: #6b7280; 
+  color: white; 
+}
+
+.distance-badge.platform { 
+  background: #8b5cf6; 
+  color: white; 
+}
+
+.distance-badge.lesson { 
+  background: #ef4444; 
+  color: white; 
+}
+
+/* ── 거리 테이블 ── */
+.distance-table-wrapper {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--border);
+}
+
+.distance-table-wrapper h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.distance-table {
+  width: 100%;
+  font-size: 0.85rem;
+  border-collapse: collapse;
+}
+
+.distance-table th {
+  background: var(--bg-light);
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border);
+  color: var(--text-primary);
+}
+
+.distance-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.distance-table tbody tr:hover {
+  background: rgba(139, 92, 246, 0.05);
+}
+
+.badge-distance {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.badge-distance.high { 
+  background: #10b981; 
+  color: white; 
+}
+
+.badge-distance.near { 
+  background: #f59e0b; 
+  color: white; 
+}
+
+.badge-distance.low { 
+  background: #94a3b8; 
+  color: white; 
+}
+
+.badge-distance.long { 
+  background: #6b7280; 
+  color: white; 
+}
+
+/* ══ Layer 3 섹션 스타일 ══ */
+.ecosystem-section {
+  margin-bottom: 2rem;
+}
+
+.ecosystem-section h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.collapsible-badge {
+  font-size: 0.75rem;
+  background: #fbbf24;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+/* ══ 현실 체크 섹션 ══ */
+.reality-check-section {
+  background: linear-gradient(to bottom, 
+    rgba(251, 191, 36, 0.05) 0%, 
+    rgba(251, 191, 36, 0.1) 100%);
+  border: 2px solid rgba(251, 191, 36, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.reality-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.reality-card {
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 1rem;
+  border-left: 4px solid;
+}
+
+.reality-card.immediate {
+  border-color: #10b981;
+  background: linear-gradient(to bottom, 
+    rgba(16, 185, 129, 0.05) 0%, 
+    rgba(16, 185, 129, 0.02) 100%);
+}
+
+.reality-card.near-term {
+  border-color: #f59e0b;
+  background: linear-gradient(to bottom, 
+    rgba(245, 158, 11, 0.05) 0%, 
+    rgba(245, 158, 11, 0.02) 100%);
+}
+
+.reality-card.long-term {
+  border-color: #6b7280;
+  background: linear-gradient(to bottom, 
+    rgba(107, 114, 128, 0.05) 0%, 
+    rgba(107, 114, 128, 0.02) 100%);
+}
+
+.reality-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.reality-icon {
+  font-size: 1.25rem;
+}
+
+.reality-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.reality-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reality-content li {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  padding: 0.25rem 0;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.reality-content li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.reality-reminder {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.reality-reminder h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.reality-reminder ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reality-reminder li {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  padding: 0.25rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.reality-reminder li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* ══ 모바일 반응형 (768px 이하) ══ */
+@media (max-width: 768px) {
+  .layer2-section {
+    padding: 1rem;
+  }
+  
+  .warning-banner {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  .tech-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .tech-row {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .tech-row .label {
+    margin-right: 0;
+    margin-bottom: 0.25rem;
+    display: inline-block;
+  }
+  
+  .distance-table {
+    font-size: 0.75rem;
+  }
+  
+  .distance-table th,
+  .distance-table td {
+    padding: 0.5rem;
+  }
+  
+  .distance-table-wrapper {
+    overflow-x: auto;
+  }
+  
+  .reality-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .reality-card {
+    padding: 0.75rem;
+  }
+  
+  .reality-content li,
+  .reality-reminder li {
+    font-size: 0.8rem;
+  }
+}
+
+/* ══ 초소형 모바일 (480px 이하) ══ */
+@media (max-width: 480px) {
+  .tech-title {
+    font-size: 0.85rem;
+  }
+  
+  .distance-badge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+  }
+  
+  .signal-header {
+    font-size: 1rem;
+  }
+  
+  .reality-title {
+    font-size: 0.85rem;
+  }
+}

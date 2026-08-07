@@ -1,0 +1,317 @@
+# GNE 근육병 모니터링 시스템 설정 파일
+# 3-Layer 구조: 직접 관련 / 간접 치료 / 생태계
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# LAYER 1: GNE 직접 관련 (관련도 8-10점)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+keywords:
+  # 직접 관련 키워드 (기존)
+  direct:
+    - "GNE myopathy"
+    - "GNE 근육병"
+    - "GNE 근병증"  # 외부 뉴스용 (변경 불가)
+    - "HIBM"
+    - "Hereditary Inclusion Body Myopathy"
+    - "Distal myopathy with rimmed vacuoles"
+    - "DMRV"
+    - "Nonaka disease"
+    - "sialic acid deficiency"
+    - "ManNAc"
+    - "N-acetylmannosamine"
+    - "GNE gene"
+    - "UDP-GlcNAc 2-epimerase"
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # LAYER 2: 근육병 치료 기술 흐름 (관련도 5-7점)
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  
+  indirect_treatment:
+    # 유전자 치료
+    - "gene therapy muscular dystrophy"
+    - "AAV myopathy"
+    - "adeno-associated virus muscle"
+    - "dystrophin gene therapy"  # DMD 성공 사례
+    - "gene replacement therapy muscle"
+    
+    # 전달 기술
+    - "LNP muscle delivery"
+    - "lipid nanoparticle myopathy"
+    - "muscle-targeted delivery"
+    
+    # 유전자 편집
+    - "CRISPR neuromuscular"
+    - "CRISPR muscular dystrophy"
+    - "base editing muscle"
+    - "prime editing myopathy"
+    
+    # RNA 치료
+    - "exon skipping"
+    - "antisense oligonucleotide muscle"
+    - "ASO myopathy"
+    - "RNA therapy muscular dystrophy"
+    - "mRNA therapy muscle"
+    
+    # 특정 질환 (참고용)
+    - "Duchenne muscular dystrophy treatment"
+    - "DMD gene therapy"
+    - "spinal muscular atrophy treatment"
+    - "SMA therapy"
+    - "limb-girdle muscular dystrophy"
+    - "LGMD gene therapy"
+    - "facioscapulohumeral muscular dystrophy"
+    - "FSHD treatment"
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # LAYER 3: 바이오 생태계 변화 (관련도 3-5점)
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  
+  indirect_ecosystem:
+    # AI 신약개발
+    - "AI drug discovery rare disease"
+    - "artificial intelligence orphan drug"
+    - "machine learning drug development"
+    - "AlphaFold protein structure"
+    - "protein structure prediction therapy"
+    
+    # 희귀병 규제/승인
+    - "FDA rare disease"
+    - "orphan drug designation"
+    - "breakthrough therapy designation"
+    - "accelerated approval rare disease"
+    - "rare disease drug development"
+    
+    # 산업 투자
+    - "rare disease investment"
+    - "orphan drug venture capital"
+    - "biotech funding neuromuscular"
+    
+    # 환자 데이터/레지스트리
+    - "patient registry rare disease"
+    - "real world evidence orphan drug"
+    - "digital biomarker neuromuscular"
+    - "patient-reported outcomes myopathy"
+    
+    # 플랫폼 기술
+    - "precision medicine rare disease"
+    - "multi-omics rare disease"
+    - "biomarker discovery myopathy"
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 제외 키워드 (명시적 필터링)
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  
+  excluded:
+    - "cancer gene therapy"  # 너무 다른 분야
+    - "oncology"
+    - "tumor"
+    - "general biotech IPO"  # 너무 광범위
+    - "cosmetic"
+    - "aesthetic"
+    - "COVID"  # 무관
+    - "coronavirus"
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 데이터 소스 설정
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+sources:
+  pubmed:
+    enabled: true
+    queries:
+      # Layer 1: 직접 관련
+      - 'GNE myopathy OR HIBM OR "Nonaka disease"'
+      - '"sialic acid deficiency" AND myopathy'
+      - 'ManNAc OR "N-acetylmannosamine"'
+      
+      # Layer 2: 간접 치료 (주간 실행)
+      - 'gene therapy AND (muscular dystrophy OR myopathy)'
+      - 'AAV AND muscle AND (therapy OR treatment)'
+      - 'CRISPR AND neuromuscular'
+    
+    date_filter: "2025/01/01"  # 2025년 이후만
+    max_results: 50
+
+  clinicaltrials:
+    enabled: true
+    conditions:
+      # Layer 1
+      - "GNE Myopathy"
+      - "HIBM"
+      - "Hereditary Inclusion Body Myopathy"
+      
+      # Layer 2
+      - "Muscular Dystrophy"
+      - "Duchenne Muscular Dystrophy"
+      - "Spinal Muscular Atrophy"
+    
+    interventions:
+      - "Gene Therapy"
+      - "AAV"
+      - "ManNAc"
+
+  news:
+    enabled: true
+    rss_feeds:
+      # Layer 1: GNE 직접
+      - query: '"GNE myopathy"'
+        language: en
+      - query: '"GNE 근육병"'
+        language: ko
+      - query: '"HIBM"'
+        language: en
+      - query: '"hereditary inclusion body myopathy"'
+        language: en
+      - query: 'Ultragenyx AND (UX016 OR GNEM)'
+        language: en
+      
+      # Layer 2: 근육병 치료 (주간 실행)
+      - query: '"gene therapy" AND "muscular dystrophy"'
+        language: en
+        layer: 2
+      - query: '"AAV" AND "muscle disease"'
+        language: en
+        layer: 2
+      
+      # Layer 3: 생태계 (주간 실행)
+      - query: '"AI drug discovery" AND "rare disease"'
+        language: en
+        layer: 3
+      - query: '"orphan drug" AND FDA'
+        language: en
+        layer: 3
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# AI 분석 설정
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+analysis:
+  summarizer:
+    model: "claude-opus-4-20250514"
+    
+    # Layer별 요약 전략
+    layer_strategy:
+      layer1:  # 직접 관련
+        min_relevance: 8.0
+        include_patient_significance: true  # 9점 이상
+        detail_level: "high"
+      
+      layer2:  # 간접 치료
+        min_relevance: 5.0
+        include_gne_distance: true  # GNE와 거리 평가 필수
+        include_positive_negative: true  # 긍정/부정 분류
+        detail_level: "medium"
+      
+      layer3:  # 생태계
+        min_relevance: 3.0
+        include_timeline: true  # 영향 시점 필수
+        include_limitations: true  # 제한점 필수
+        detail_level: "low"
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 스케줄 설정
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+schedule:
+  # Layer 1: 매주 실행
+  layer1:
+    frequency: "weekly"
+    day: "Monday"
+    time: "08:00"
+    tasks:
+      - collect_pubmed
+      - collect_clinicaltrials
+      - collect_news_layer1
+      - analyze_summarize
+      - generate_report
+  
+  # Layer 2/3: 격주 실행 (비용 절감)
+  layer2_3:
+    frequency: "biweekly"  # 2주마다
+    day: "Monday"
+    time: "08:00"
+    tasks:
+      - collect_news_layer2
+      - collect_news_layer3
+      - analyze_summarize_layer2_3
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 리포트 설정
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+report:
+  title: "GNE 근육병 주간 뉴스레터"
+  
+  sections:
+    # Zone 1: Hero
+    hero:
+      enabled: true
+      content: "AI 최고 관련도 논문 1건"
+    
+    # Zone 2: Quick Scan + Layer 2
+    quick_scan:
+      enabled: true
+      count: 2  # 상위 2건
+    
+    layer2:
+      enabled: true
+      title: "🔬 근육병 치료 기술 흐름"
+      warning: "⚠️ GNE 직접 적용은 별개"
+      include_distance_table: true
+    
+    layer3:
+      enabled: true
+      title: "🌐 바이오 생태계 변화"
+      warning: "⚠️ 영향까지 5-10년"
+    
+    # Zone 3: Collapsible
+    collapsible:
+      - news
+      - charts_papers
+      - clinical_trials
+  
+  # 현실 체크 섹션
+  reality_check:
+    enabled: true
+    categories:
+      - "실제로 환자에게 곧 도움이 될 것"
+      - "3-5년 내 가능성"
+      - "10년 이상 걸릴 것"
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 데이터베이스
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+database:
+  path: "data/gne_monitor.db"
+  
+  # Layer 태그 추가
+  schema:
+    publications:
+      - layer  # 1, 2, 3
+      - gne_distance  # immediate, near_term, long_term, platform
+      - outcome_type  # positive, negative, mixed, neutral
+    
+    news:
+      - layer
+      - gne_distance
+    
+    trials:
+      - layer  # 임상시험은 대부분 Layer 1
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 출력 설정
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+output:
+  formats:
+    - html
+    - json
+  
+  directory: "exports"
+  
+  # HTML 테마
+  theme:
+    primary_color: "#8b5cf6"  # 보라색
+    secondary_color: "#a78bfa"
+    accent_color: "#fbbf24"  # Layer 2/3 경고 배지
